@@ -37,7 +37,6 @@ class Rep01Controller extends Controller
 
     public function getUserByModul($program,$skill,$modul)
     {        
-        // dd($modul);
         return Datatables::of(GleadsModulMember::where('program_name','=',$program)
         ->where('skill_name','=',$skill)
         ->where('module_name','=',$modul)
