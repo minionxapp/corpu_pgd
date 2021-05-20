@@ -1,0 +1,33 @@
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/minionxapp/mgfront.git
+git push -u origin main
+
+//heroku
+heroku login
+$ cd my-project/
+$ git init
+$  heroku git:remote -a mgfront22
+Deploy your application
+Commit your code to the repository and deploy it to Heroku using Git.
+
+$ git add .
+$ git commit -am "make it better"
+$ git push heroku main
+
+echo web: vendor/bin/heroku-php-apache2 public/ > Procfile
+git add .
+git push heroku main
+php artisan key:generate --show
+tambahkan APP_KEY pada configvars dengan value dari nilai diatas
+dan juga KEY yang diperlukan untuk koneksio ke database
+
+
+buat file Procfile dengan notepad
+dengan isi :;  web: vendor/bin/heroku-php-apache2 public/
+migrasi database ke heroku :: heroku run bash
+php artisan migrate
+php artisa db:seed
