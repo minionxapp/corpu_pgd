@@ -9,9 +9,7 @@ use App\Models\GleadsModul;
 class GleadsModulMember extends Model
 {
     use HasFactory;
-    protected $table ='trans_data_gleads_temp';//
-    // 'gleads_modul_members';//'tmp_xxx';
-
+    protected $table ='trans_data_gleads_temp';
 
     public function gleadsModul()
     {

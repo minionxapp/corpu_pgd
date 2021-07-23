@@ -315,11 +315,11 @@ return [
                     'url'  => '/desaintraining',
                     'can'     => ['dev','admin'],
                 ],              
-                [
-                    'text' => 'Master Training',
-                    'url'  => '/gleadsmodul',
-                    'can'     => ['dev','admin'],
-                ],
+                // [
+                //     'text' => 'Master Training',
+                //     'url'  => '/gleadsmodul',
+                //     'can'     => ['dev','admin'],
+                // ],
                 [
                     'text' => 'Buka Blokir',
                     'url'  => '/#',
@@ -341,6 +341,22 @@ return [
                     'icon'    => 'fas fa-fw fa-share',
                     'can'     => ['dev','admin'],
                     'submenu' => [
+                        [
+                            'text' => 'Program',
+                            'url'  => '/transgleadsprogram',
+                            'can'     => ['dev','admin'],
+                        ], 
+                        [
+                            'text' => 'Skill',
+                            'url'  => '/transgleadsskill',
+                            'can'     => ['dev','admin'],
+                        ], 
+                        [
+                            'text' => 'Modul',
+                            'url'  => '/gleadsmodul',
+                            'can'     => ['dev','admin'],
+                        ], 
+                        
                         [
                             'text' => 'Training Report',
                             'url'  => '/rep01',
@@ -438,6 +454,25 @@ return [
                     'url'  => '/kamera',
                     'can'     => ['dev','admin'],
                 ],
+                [
+                    'text' => 'autocomplete',
+                    'url'  => '/autocomplete',
+                    'can'     => ['dev','admin'],
+                ],
+                [
+                    'text' => 'uploadfile',
+                    'url'  => '/uploadfile',
+                    'can'     => ['dev','admin'],
+                ],
+                [
+                    'text' => 'Kirim Email',
+                    'url'  => '/email',
+                    'can'     => ['dev','admin'],
+                ],
+
+                
+
+                
                 [
                     'text' => 'Detik.com',
                     'url'  => 'detik.com',

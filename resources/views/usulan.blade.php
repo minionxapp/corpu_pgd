@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Usulan Training</h1>
+                    <h1>Daftar Usulan Training</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -118,25 +118,22 @@
                                     <option value='Lain'>Lain-lain</option>
                                 </select>
                             </div>
-                            {{-- <div class="form-group col-md-6">
+                            <div class="form-group col-md-6">
                                 <label for="status">Status</label>
-                                <select name="status" class="form-control" id="status">
+                                <select name="status" class="form-control" id="status"
+                                 readonly tabindex="-1">
                                     <option value="">Status</option>
                                     <option value='Usul'>Usulan</option>
                                     <option value='OnProgress'>OnProgress</option>
                                     <option value='Selesai'>Selesai</option>
                                     <option value='Tolak'>Tolak</option>
                                 </select>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="file_usul" id='lbl_file_usul'>File Usulan :</label>
                             <input type="file" name="file_usul" class="form-control" id="file_usul">
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="lbl_file_dispo" id="lbl_file_dispo">File Disposisi</label>
-                            <input type="file" name="file_dispo" class="form-control" id="file_dispo">
-                        </div> --}}
 
                         <div class="form-group">
                             <label for="file_usul_link" id='lbl_file_usul_link'>File Link</label>
@@ -146,10 +143,6 @@
                             <label for="comment">Catatan</label>
                             <input type="text" name="comment" class="form-control" id="comment">
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="deadline">Deadline</label>
-                            <input type="date" name="deadline" class="form-control" id="deadline">
-                        </div> --}}
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="mulai">Mulai Pelaksanaan</label>
@@ -173,52 +166,15 @@
                         </div>
                         <div class="form-group">
                             <label for="asign_to">Assign Akademi</label>
-                            {{-- <input type="text" name="asign_to" class="form-control" id="asign_to"> --}}
-                            
                             <select name="asign_to" class="form-control" id="asign_to">
                                 @foreach ($departemen as $item)
                                 <option value="{{$item->kode}}">{{$item->nama}}</option>
                                 @endforeach
                             </select>
-                            {{-- <select name="asign_to" class="form-control" id="asign_to">
-                                <option value="">Assign Ke</option>
-                                <option value='Supporing'>Supporing</option>
-                                <option value='JOS'>JOS</option>
-                                <option value='Syariah'>Syariah</option>
-                                <option value='Digital'>Digital</option>
-                                <option value='Gadai'>Gadai</option>
-                                <option value='Leadership'>Leadership</option>
-                                <option value='Micro'>Micro</option>
-                                <option value='LOGS'>LOGS</option>
-                                <option value='Sertifikasi'>Sertifikasi</option>
-                            </select> --}}
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="pic_asign_to">PIC Akademi</label>
-                            <input type="text" name="pic_asign_to" class="form-control" id="pic_asign_to">
-                        </div> --}}
-                        {{-- <div class="form-group">
-                            <label for="asign_desc">Asign Desc</label>
-                            <input type="text" name="asign_desc" class="form-control" id="asign_desc">
-                        </div> --}}
-
-                        {{-- <div class="form-group">
-                            <label for=""></label>
-                            <input type="text" name="" class="form-control" id="">
-                        </div> --}}
 
 
 
-
-
-                        {{-- <div class="form-group">
-                            <select name="role" class="form-control" id="role">
-                                <option value="">Role</option>
-                                @foreach ($roles as $role)
-                                    <option value={{ $role->role_id }}>{{ $role->desc }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -255,7 +211,6 @@
                 $('input.typeahead').typeahead({
                     source:  function (query, process) {
                     return $.get(path, { query: query }, function (data) {
-                        // alert(data);
                             return process(data);
                         });
                     }
@@ -285,11 +240,6 @@
                         data: 'divisi',
                         name: 'divisi'
                     },
-                    // {
-                    //     data: 'unit_usul',
-                    //     name: 'unit_usul'
-                    // },
-                   
                     {
                         data: 'mulai',
                         name: 'mulai'
@@ -302,22 +252,6 @@
                         data: 'status',
                         name: 'status'
                     },
-
-                    // { data: 'file_usul', name: 'file_usul' }, 
-                    // { data: 'file_usul_link', name: 'file_usul_link' }, 
-                    // { data: 'file_dispo', name: 'file_dispo' }, 
-                    // { data: 'file_dispo_link', name: 'file_dispo_link' }, 
-                    // { data: 'comment', name: 'comment' }, 
-                    // { data: 'deadline', name: 'deadline' }, 
-                    // { data: 'jenis_usul', name: 'jenis_usul' }, 
-                    // { data: 'pic_usul', name: 'pic_usul' }, 
-                    // { data: 'no_pic_usul', name: 'no_pic_usul' }, 
-                    // { data: 'asign_to', name: 'asign_to' }, 
-                    // { data: 'pic_asign_to', name: 'pic_asign_to' }, 
-                    // { data: 'asign_desc', name: 'asign_desc' }, 
-                    // { data: 'create_by', name: 'create_by' }, 
-                    // { data: 'update_by', name: 'update_by' }, 
-
                     {
                         data: 'action',
                         name: 'action',
@@ -334,7 +268,7 @@
             $('#no_srt').val('');
             $('#deskripsi').val('');
             $('#unit_usul').val('');
-            $('#status').val('');
+            $('#status').val('Usul');
             $('#file_usul').val('');
             $('#file_usul_link').val('');
             $('#file_dispo').val('');
@@ -359,6 +293,8 @@
             $("#lbl_file_usul").empty();
             $("#lbl_file_usul").append('  File Usulan :');
             $('#btnsubmit').prop("disabled", false);
+            $('#status').attr('readonly', true);
+            $('#status').prop('disabled',true);
         }
 
         async function viewFunction($id) {
@@ -406,13 +342,7 @@
                     $("#lbl_file_usul_link").append('  File Link :  <a href="' +
                         data.file_usul_link + '" target=\"_blank\"">' + 
                         'link'+ '</a>');
-
-
-
-
-
                     $('#id').attr('readonly', true);
-
                     $('#btnsubmit').prop("disabled", true);
                     $('#btnsubmit').prop("disabled", true);
                 }
@@ -424,9 +354,21 @@
             await viewFunction($id);
             readonly(false);
             $('#btnsubmit').prop("disabled", false);
+            // $('#status').attr('readonly', true);
+            // $('status, select').readonly(true);
+            // $('#status').prop('tabindex', '-1');
+            // $('#status').prop('disabled',false);
+            // readonly tabindex="-1"
+            // attr('readonly', 'readonly')
         }
 
-
+        async function prosesFunction($id){
+            await viewFunction($id);
+            readonly(true);
+            $('#status').attr('readonly', false);
+            $('#status').prop('disabled',false);
+            $('#btnsubmit').prop("disabled", false);
+        }
         // 'no_srt','deskripsi','unit_usul','status','file_usul','file_usul_link','file_dispo','file_dispo_link','comment','deadline','jenis_usul','pic_usul','no_pic_usul','asign_to','pic_asign_to','asign_desc','create_by','update_by',   
         function readonly(params) {
             $('#id').attr('readonly', true);
@@ -454,6 +396,8 @@
 
             $('#userid').attr('readonly', params);
             $('#name').attr('readonly', params);
+
+            
 
         }
 

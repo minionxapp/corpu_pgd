@@ -25,13 +25,12 @@ public function usulan()
         $divisi = Divisi::all();
         $user = Auth::user();
         $departemen = Departement::where('divisi_kode','=',$user->divisi)->get();
-        // dd($user);
         return view('usulan',['divisi'=>$divisi,'departemen'=>$departemen]);
     }
 
 public function allUsulan()
     {        
-        return DataTables::of(Usulan::all())
+        return DataTables::of(Usulan::where('status','=','Usul')->get())
         ->addColumn('divisi', function($row){
             $divisi = Divisi::where('kode','=',$row->unit_usul)->first();
             return $divisi->nama;
@@ -39,8 +38,11 @@ public function allUsulan()
         
         ->addColumn('action', function($row){       
             $btn = '<a href="#" onclick="viewFunction(\''.$row->id.'\');" class="edit btn btn-info btn-sm">View</a> ';
-            $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
-            $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+            if ($row->status == "Usul") {
+                $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+            };
+            // $btn = $btn.' <a href="#" onclick="prosesFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Proses</a>';
             return $btn;        })
         ->rawColumns(['action','divisi'])
         ->make(true);
@@ -53,7 +55,7 @@ public function addUsulan(Request $request)
             $usulan->no_srt = $request->no_srt;
             $usulan->deskripsi = $request->deskripsi;
             $usulan->unit_usul = $request->unit_usul;
-            $usulan->status ='Usul' ;//$request->status;
+            //$request->status;
            
             $usulan->file_usul_link = $request->file_usul_link;
             $usulan->file_dispo_link = $request->file_dispo_link;
@@ -81,6 +83,7 @@ public function addUsulan(Request $request)
                 $usulan->file_dispo =Carbon\Carbon::now()->timestamp.'_'.($request->file('file_dispo')->getClientOriginalName());//$request->file1;
             }
 
+            $usulan->status ='Usul' ;
 
             if($request->id == null ){    
                 $usulan->create_by = Auth::user()->user_id;
@@ -89,6 +92,8 @@ public function addUsulan(Request $request)
             }else{
                 $usulanUpdate = Usulan::find($request->id);
                 $usulanUpdate->update_by = Auth::user()->user_id;
+                $usulan->status =$request->status;
+                // dd($usulan->status); 
                 $usulanUpdate->update($usulan->toArray());
                 return redirect('/usulan')->with('sukses','Update Berhasil di Simpan');
             }

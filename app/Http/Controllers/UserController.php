@@ -82,4 +82,11 @@ class UserController extends Controller
        return $user;
    }
 
+   public function getUserByDepartemen($departemen)
+   {
+       $user = User::where("departemen","=",$departemen)->get();
+       return $user;
+   }
+
+  
 }

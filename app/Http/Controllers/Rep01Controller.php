@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use DataTables;
 use App\Models\GleadsModul;
 use App\Models\GleadsModulMember;
+use App\Models\TransGleadsProgram;
 
 class Rep01Controller extends Controller
 {
     public function rep01()
     {
-        $programs = GleadsModul::distinct()->get(['program_name']);
+        // $programs = GleadsModul::distinct()->orderBy('urut', 'ASC')->get(['program_name']);
+        $programs = TransGleadsProgram::where('valid','=','Y')->get();
         return view('rep01',['program'=>$programs]);
     }
 
@@ -28,6 +30,12 @@ class Rep01Controller extends Controller
         return $skills;
     }
 
+    public function getSkillByProgramNoTh($program){
+        $skills = GleadsModul::where('program_name','=',$program)
+        ->distinct()->get(['skill_name']);
+        return $skills;
+    }
+
     public function getmodulBySkill($program,$skill){
         $modul = GleadsModul::where('program_name','=',$program)
         ->where('skill_name','=',$skill)
@@ -37,7 +45,8 @@ class Rep01Controller extends Controller
 
     public function getUserByModul($program,$skill,$modul)
     {        
-        return Datatables::of(GleadsModulMember::where('program_name','=',$program)
+        return DataTables::of(GleadsModulMember::
+        where('program_name','=',$program)
         ->where('skill_name','=',$skill)
         ->where('module_name','=',$modul)
         )

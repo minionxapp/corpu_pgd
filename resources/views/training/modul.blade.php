@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Daftar Training</h1>
+                    <h1>Modul Training</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -36,14 +36,7 @@
             <form action="/search" method="POST">
                 {{ csrf_field() }}
                 <div class="row">
-                    {{-- <div class="form-group col-lg-6">
-                        <label for="tahun">Tahun</label>
-                        <select name="tahun_rep" class="form-control" id="tahun_rep">
-                            <option value="">Tahun</option>
-                            <option value="2019">2019</option>
-                            <option value="2020">2020</option>
-                        </select>
-                    </div> --}}
+                   
                     <div class="form-group col-lg-6">
                         <label for="program">Program</label>
                         <select name="program" class="form-control" id="program">
@@ -51,6 +44,11 @@
                             @foreach ($program as $item)
                             <option value="{{$item->program_name}}">{{$item->program_name}}</option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <label for="skill">Skill</label>
+                        <select name="skill" class="form-control" id="skill">
                         </select>
                     </div>
                 </div>
@@ -95,7 +93,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Data Training</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Modul Training</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -122,6 +120,10 @@
                         <div class="form-group">
                             <label for="modul_name">Nama Modul</label>
                             <input type="text" name="modul_name" class="form-control" id="modul_name">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_training">nama_training</label>
+                            <input type="text" name="nama_training" class="form-control" id="nama_training">
                         </div>
                         <div class="row">
                             <div class="form-group col-6">
@@ -170,6 +172,22 @@
                                 <input type="text" name="type_enroll" class="form-control" id="type_enroll">
                             </div>
                         </div>
+
+
+
+                            <div class="form-group">
+                                <label for="hitung">As Training</label>
+                                {{-- <input type="text" name="hitung" class="form-control" id="hitung"> --}}
+                                <select name="modul_as_training" class="form-control" id="modul_as_training">
+                                    <option value="Ya">Ya</option>
+                                    <option value="Tidak">Tidak</option>
+                                </select>
+                            </div>
+                            <div class="form-group ">
+                                <label for="type_enroll">type_enroll</label>
+                                <input type="text" name="type_enroll" class="form-control" id="type_enroll">
+                            </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" id="btnsubmit" class="btn btn-primary">Submit</button>
@@ -186,10 +204,8 @@
 @stop
 @section('js')
     <script>
-        $(document).ready(function() {
-            // awal();
-            // dropDown('program', 'skill', '/skill/', 'skill_name', 'skill_name');
-            // alert("{{$programName}}");
+        $(document).ready(function() {          
+            dropDown('program', 'skill', '/skillnoth/', 'skill_name', 'skill_name');
             $('#program').val("{{$programName}}");
             searchFunction();
         });
@@ -292,6 +308,9 @@
             $('#modul_type').val('');
             $('#tahun').val('');
             $('#type_enroll').val('');
+            $('#modul_as_training').val('');
+            $('#nama_training').val('');
+            
             $('#formData').modal('show');
             $('#btnsubmit').prop("disabled", false);
 
@@ -319,6 +338,9 @@
                     $('#modul_type').val(data.modul_type);
                     $('#tahun').val(data.tahun);
                     $('#type_enroll').val(data.type_enroll);
+                    $('#modul_as_training').val(data.modul_as_training);
+                    $('#nama_training').val(data.nama_training);
+                    
                     $('#btnsubmit').prop("disabled", true);
                 }
 
@@ -352,12 +374,14 @@
             $('#modul_type').attr('readonly', params);
             $('#tahun').attr('readonly', params);
             $('#type_enroll').attr('readonly', params);
+            $('#modul_as_training').attr('readonly', params);
+            
         }
 
 
 
         function searchFunction() {
-            url = '/getGleadsModulByProgram/'+$("#program").val();
+            url = '/getGleadsModulByProgram/'+$("#skill").val();
             $('#myTable').dataTable().fnClearTable();
             $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
@@ -443,12 +467,11 @@
                     $('select[name="' + "skill" + '"]').append('<option value="' +
                                     "" + '">' + "--Skill Name--" + '</option>');
                     $.ajax({
-                        url: url + filter+"/"+$("#tahun").val(),
+                        url: url + filter+"/",//$("#tahun").val(),
                         type: "GET",
                         async: false,
                         dataType: "json",
                         success: function(data) {
-                            // $('select[name="' + child + '"]').empty();
                             $.each(data, function(key, value) {
                                 $('select[name="' + child + '"]').append('<option value="' +
                                     value[kode] + '">' + value[nama] + '</option>');
@@ -460,6 +483,7 @@
                 }
             });
         }
+
 
 
     </script>

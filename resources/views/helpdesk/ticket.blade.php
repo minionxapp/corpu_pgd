@@ -148,8 +148,23 @@
     <script>
         $(document).ready(function() {
             awal();
+            $('#nama').attr('readonly', true);
+            $('#email').attr('readonly', true);
         });
 
+
+        $("#nik" ).focusout(function() {
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: '/carikaryawan/' + $("#nik" ).val(),
+                success: function(data) {
+                    $("#nama").val(data['NAMA_KARYAWAN']);
+                    $("#email").val(data['EMAIL_1'])
+                }
+            });
+
+         });
         function awal() {
             $('#myTable').DataTable({
                 rowReorder: {
@@ -244,6 +259,8 @@
             $('#prioritas').val('');
             $('#formData').modal('show');
             $('#btnsubmit').prop("disabled", false);
+            $('#nama').attr('readonly', true);
+            $('#email').attr('readonly', true);
 
             readonly(false);
         }
@@ -267,6 +284,8 @@
                     $('#tgl_selesai').val(data.tgl_selesai);
                     $('#prioritas').val(data.prioritas);
                     $('#btnsubmit').prop("disabled", true);
+                    $('#nama').attr('readonly', true);
+                    $('#email').attr('readonly', true);
                 }
             });
 
@@ -278,6 +297,8 @@
             $('#id').attr('readonly', true);
             $('#btnsubmit').prop("disabled", false);
             readonly(false);
+            $('#nama').attr('readonly', true);
+            $('#email').attr('readonly', true);
         }
 
         function readonly(params) {

@@ -11,7 +11,9 @@ class GleadsModul extends Model
     use HasFactory;
     protected $table ="trans_gleads_module";
     //"gleads_modul";
-    protected $fillable=["program_name","skill_name","modul_name","jamlat","hitung","enrolled","selesai","progress","belum","modul_type","tahun","type_enroll"];
+    protected $fillable=["program_name","skill_name","modul_name","jamlat",
+    "hitung","enrolled","selesai","progress","belum","modul_type","tahun",
+    "type_enroll","modul_as_training","nama_training"];
 
     public function gleadsModulMember()
     {

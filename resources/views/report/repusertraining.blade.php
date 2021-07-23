@@ -44,6 +44,9 @@
             <button type="button" class="btn btn-primary btn-sm float-left"  
                 data-toggle="modal" onclick="searchFunction();" >Search
             </button>
+            <button type="button" class="btn btn-primary btn-sm float-left"  
+                data-toggle="modal" onclick="cetakFunction();" >Cetak
+            </button>
         </div>
     </div>
 
@@ -52,6 +55,7 @@
             <thead>
                 <tr>
                     <th>Program</th>  
+                    <th>Nama Training</th>
                     <th>Skill</th>  
                     <th>Modul</th>  
                     <th>Modul Status</th>    
@@ -121,8 +125,6 @@
 
 
         function searchFunction() {
-            // alert($("#program option:selected" ).text());
-            // alert($("#program").val()+"|"+$("#skill").val()+"|"+$("#modul").val());
             $('#myTable').dataTable().fnClearTable();
             $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
@@ -136,12 +138,13 @@
                 columns: [
                     // { data: 'User_Id', name: 'User_Id' },  
                     // { data: 'User_Name', name: 'User_Name' },    
-                    { data: 'Program_Name', name: 'Program_Name' },      
-                    { data: 'Skill_Name', name: 'Skill_Name' },  
-                    { data: 'Module_Name', name: 'Module_Name' }, 
+                    { data: 'program_name', name: 'program_name' },   
+                    { data: 'nama_training', name: 'nama_training' },     
+                    { data: 'skill_name', name: 'skill_name' },  
+                    { data: 'module_name', name: 'module_name' }, 
                                  
-                    { data: 'Module_Status', name: 'Module_Status' },   
-                    { data: 'Sub_Department', name: 'Sub_Department' },                        
+                    { data: 'module_status', name: 'module_status' },   
+                    { data: 'sub_department', name: 'sub_department' },                        
                     {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
@@ -149,6 +152,11 @@
 
         }
 
+
+        function cetakFunction() {
+            // alert('Cetak Function');
+            window.open("cetakUserTraining/"+$("#nik").val());
+        }
         function awal() {
             $('#myTable').DataTable({
                 rowReorder: {

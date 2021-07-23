@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GleadsModul;
+use App\Models\TransGleadsProgram;
 use DataTables;
 use Auth;
 use Carbon;
@@ -13,13 +14,23 @@ class GleadsModulController extends Controller
 
     public function GleadsModul()
     {
-        $programs = GleadsModul::distinct()->get(['program_name']);       
+        // $programs = GleadsModul::distinct()->get(['program_name']); 
+        $programs = TransGleadsProgram::
+        where('valid','=','Y')
+        ->orderBy('program_name', 'ASC')
+        ->get();      
         return view('training.modul',['program'=>$programs,'programName'=>'']);
     }
 
     public function GleadsModulProgram($program)
     {
-        $programs = GleadsModul::distinct()->get(['program_name']);       
+        $programs = TransGleadsProgram::
+        where('valid','=','Y')
+        ->orderBy('program_name', 'ASC')
+        ->get();      
+        // GleadsModul::distinct()
+        // ->orderBy('program_name', 'ASC')
+        // ->get(['program_name']);       
         return view('training.modul',['program'=>$programs,'programName'=>$program]);
     }
     public function allGleadsModul()
@@ -35,12 +46,11 @@ class GleadsModulController extends Controller
             ->make(true);
     }
 
-    // with(['item'=>function($query)
-
-    public function getModulByProgram($program)
+    //untuk by skill
+    public function getModulByProgram($skillNama)
     {
-        if ($program =='all'){
-            return Datatables::of(GleadsModul::all())
+        if ($skillNama =='all'){
+            return Datatables::of(GleadsModul::where('skill_name','=',$skillNama)->get())
             ->addColumn('action', function ($row) {
                 $btn = '<a href="#" onclick="viewFunction(\'' . $row->id . '\');" class="edit btn btn-info btn-sm">View</a> ';
                 $btn = $btn . ' <a href="#" onclick="editFunction(\'' . $row->id . '\');" class="edit btn btn-primary btn-sm">Edit</a>';
@@ -51,7 +61,7 @@ class GleadsModulController extends Controller
             ->make(true);
         }else{
             // disertakan detail pesertanya return Datatables::of(GleadsModul::with(['gleadsModulMember'])->where('program_name','=',$program))
-            return Datatables::of(GleadsModul::where('program_name','=',$program))
+            return Datatables::of(GleadsModul::where('skill_name','=',$skillNama))
             ->addColumn('action', function ($row) {
                 $btn = '<a href="#" onclick="viewFunction(\'' . $row->id . '\');" class="edit btn btn-info btn-sm">View</a> ';
                 $btn = $btn . ' <a href="#" onclick="editFunction(\'' . $row->id . '\');" class="edit btn btn-primary btn-sm">Edit</a>';
@@ -87,11 +97,18 @@ class GleadsModulController extends Controller
             $model->type_enroll = $request->type_enroll;
             $model->modul_id = $request->program_name.$request->skill_name.$request->modul_name;
             $model->create_by = Auth::user()->user_id;
+            $model->modul_as_training = $request->modul_as_training;
+            $model->nama_training = $request->nama_training;
+            
             $model->save();
             return redirect('/gleadsmodul')->with('sukses', 'Data Berhasil di Simpan');
         } else {
             $modelUpdate = GleadsModul::find($request->id);
             $modelUpdate->update_by = Auth::user()->user_id;
+            if($request->modul_as_training =='Ya'){
+                $modelUpdate->nama_training = $modelUpdate->modul_name;
+            }
+            // modul_as_training
             $modelUpdate->update($request->all());
             return redirect('/gleadsmodul'."/".$modelUpdate->program_name)->with('sukses', 'Update Berhasil di Simpan');
         }

@@ -9,7 +9,8 @@ class Project extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kd_project','nm_project','descripsi','divisi','departement','jenis','nm_divisi','nm_departement'
+        'kd_project','nm_project','descripsi','divisi','departement',
+        'jenis','nm_divisi','nm_departement','pic','mulai','selesai','status'
     ];
     
 }

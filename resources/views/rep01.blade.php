@@ -38,7 +38,7 @@
             <form action="/search" method="POST">
                 {{ csrf_field() }}
                 <div class="row">
-                    <div class="form-group col-lg-6">
+                    {{-- <div class="form-group col-lg-6">
                         <label for="tahun">Tahun</label>
                         <select name="tahun" class="form-control" id="tahun">
                             <option value="">Tahun</option>
@@ -46,9 +46,9 @@
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="form-group col-lg-6">
-                        <label for="program">Program</label>
+                        <label for="program">Program/Akademi</label>
                         <select name="program" class="form-control" id="program">
                             @foreach ($program as $item)
                             <option value="{{$item->program_name}}">{{$item->program_name}}</option>
@@ -146,7 +146,7 @@
     <script> 
         $(document).ready(function() {
             //awal();
-            dropDown('program', 'skill', '/skill/', 'skill_name', 'skill_name');
+            dropDown('program', 'skill', '/skillnoth/', 'skill_name', 'skill_name');
             dropDownModul('skill', 'modul', '/modul/', 'modul_name', 'modul_name');
  
         });
@@ -164,7 +164,7 @@
                     $('select[name="' + "skill" + '"]').append('<option value="' +
                                     "" + '">' + "--Skill Name--" + '</option>');
                     $.ajax({
-                        url: url + filter+"/"+$("#tahun").val(),
+                        url: url + filter,//+"/"+$("#tahun").val(),
                         type: "GET",
                         async: false,
                         dataType: "json",
@@ -298,4 +298,8 @@
 
 
     </script>
+
+
+
+
 @stop

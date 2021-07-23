@@ -20,7 +20,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('/addTicket', [App\Http\Controllers\TicketController::class, 'addTicket'])->name('addTicket');
       
   
-
+//No Login
+Route::get('/carikaryawan/{nip}', [App\Http\Controllers\TransKaryawanController::class, 'carikaryawan'])->name('carikaryawan');
+ 
 
 
 Route::get('/', function () {
@@ -55,6 +57,7 @@ Route::group(['middleware' => ['permission:admin|dev']], function () {
     Route::post('/addUser', [App\Http\Controllers\UserController::class, 'addUser'])->name('addUser');
     Route::get('/getUserById/{id}', [App\Http\Controllers\UserController::class, 'getUserById'])->name('getUserById');
     Route::get('/getUserByUserId/{id}', [App\Http\Controllers\UserController::class, 'getUserByUserId'])->name('getUserByUserId');
+    Route::get('/getUserByDepartemen/{departemen}', [App\Http\Controllers\UserController::class, 'getUserByDepartemen'])->name('getUserByDepartemen');
 
     
 
@@ -121,6 +124,21 @@ Route::group(['middleware' => ['permission:admin|dev']], function () {
     
 
 Route::group(['middleware' => ['permission:admin|dev|group1|user']], function () {
+    //EXAMPLE CONTOH
+    Route::get('/autocomplete', [App\Http\Controllers\ContohController::class, 'autocomplete'])->name('autocomplete');
+    Route::get('/cari', [App\Http\Controllers\ContohController::class, 'cariData'])->name('cari');
+    Route::get('/uploadfile', [App\Http\Controllers\ContohController::class, 'uploadfile'])->name('uploadfile');
+    Route::post('/uploadfile_proses', [App\Http\Controllers\ContohController::class, 'uploadfileProses'])->name('uploadfileProses');
+    Route::get('/deletefile/{id}', [App\Http\Controllers\ContohController::class, 'deletefile'])->name('deletefile');
+
+    Route::get('/email', [App\Http\Controllers\ContohController::class, 'email'])->name('email');
+    Route::post('/kirimemail', [App\Http\Controllers\ContohController::class, 'kirimemail'])->name('kirimemail');
+   
+    
+    
+
+
+
     //TEST SCRIP GENERATOR
     Route::get('/testscrip', [App\Http\Controllers\TestScripController::class, 'TestScrip'])->name('testscript');
     Route::get('/allTestScrip', [App\Http\Controllers\TestScripController::class, 'allTestScrip'])->name('allTestScrip');
@@ -145,8 +163,16 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/program', [App\Http\Controllers\Rep01Controller::class, 'getProgram'])->name('program');
     Route::get('/skill/{program}/{th}', [App\Http\Controllers\Rep01Controller::class, 'getSkillByProgram'])->name('skill');
     Route::get('/modul/{program}/{skill}', [App\Http\Controllers\Rep01Controller::class, 'getmodulBySkill'])->name('modul');
+    Route::get('/skillnoth/{program}', [App\Http\Controllers\Rep01Controller::class, 'getSkillByProgramNoTh'])->name('getSkillByProgramNoTh');
+  
+
+    
     Route::get('/modulmember/{program}/{skill}/{modul}', [App\Http\Controllers\Rep01Controller::class, 'getUserByModul'])->name('modulmember');
     
+    Route::get('/skillbyprogram/{program}/', [App\Http\Controllers\TransGleadsSkillController::class, 'getTransGleadsSkillbyProgram'])->name('getTransGleadsSkillbyProgram');
+   
+    Route::get('/program', [App\Http\Controllers\Rep01Controller::class, 'getProgram'])->name('program');
+   
     
     //ITEMsACTION SCRIP GENERATOR
     Route::get('/itemsaction', [App\Http\Controllers\ItemsActionController::class, 'ItemsAction'])->name('itemsaction');
@@ -174,7 +200,10 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     
     Route::get('/repUserTraining', [App\Http\Controllers\RepUserTrainingController::class, 'repUserTraining'])->name('repUserTraining');
     Route::get('/getTrainingByUser/{nik}', [App\Http\Controllers\RepUserTrainingController::class, 'getTrainingByUser'])->name('getTrainingByUser');
+    Route::get('/cetakUserTraining/{nik}', [App\Http\Controllers\RepUserTrainingController::class, 'cetakUserTraining'])->name('cetakUserTraining');
   
+
+    
     
         //TEST SCRIP GENERATOR
         Route::get('/desaintraining', [App\Http\Controllers\DesainTrainingController::class, 'DesainTraining'])->name('desaintraining');
@@ -258,6 +287,21 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
           
         Route::get('/tickethandle', [App\Http\Controllers\TicketController::class, 'TicketHadle'])->name('tickethandle');
  
-
+        //GELADS -PROGRAM
+      
+        Route::get('/transgleadsprogram', [App\Http\Controllers\TransGleadsProgramController::class, 'TransGleadsProgram'])->name('transgleadsprogram');
+        Route::get('/allTransGleadsProgram', [App\Http\Controllers\TransGleadsProgramController::class, 'allTransGleadsProgram'])->name('allTransGleadsProgram');
+        Route::post('/addTransGleadsProgram', [App\Http\Controllers\TransGleadsProgramController::class, 'addTransGleadsProgram'])->name('addTransGleadsProgram');
+        Route::get('/getTransGleadsProgramById/{id}', [App\Http\Controllers\TransGleadsProgramController::class, 'getTransGleadsProgramById'])->name('getTransGleadsProgramById');
+        Route::get('/delTransGleadsProgram/{id}', [App\Http\Controllers\TransGleadsProgramController::class, 'delTransGleadsProgram'])->name('delTransGleadsProgram');
+        
+        
+        //GELADS -SKILL
+        Route::get('/transgleadsskill', [App\Http\Controllers\TransGleadsSkillController::class, 'TransGleadsSkill'])->name('transgleadsskill');
+        Route::get('/allTransGleadsSkill', [App\Http\Controllers\TransGleadsSkillController::class, 'allTransGleadsSkill'])->name('allTransGleadsSkill');
+        Route::post('/addTransGleadsSkill', [App\Http\Controllers\TransGleadsSkillController::class, 'addTransGleadsSkill'])->name('addTransGleadsSkill');
+        Route::get('/getTransGleadsSkillById/{id}', [App\Http\Controllers\TransGleadsSkillController::class, 'getTransGleadsSkillById'])->name('getTransGleadsSkillById');
+        Route::get('/delTransGleadsSkill/{id}', [App\Http\Controllers\TransGleadsSkillController::class, 'delTransGleadsSkill'])->name('delTransGleadsSkill');
+        
 
 });

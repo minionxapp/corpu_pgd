@@ -38,7 +38,8 @@
             href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
             
         <link rel="stylesheet" href="{{ asset('vendor/kalendar/main.css') }}">
-       
+        <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.css') }}">
+
     @else
         <link rel="stylesheet" href="{{ mix(config('adminlte.laravel_mix_css_path', 'css/app.css')) }}">
     @endif
@@ -93,6 +94,7 @@
   crossorigin="anonymous"></script>
     <script src="{{ asset('vendor/bootstrap/instascan.min.js') }}"></script> --}}
 
+ 
 
         <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -106,8 +108,7 @@
         <script src="../plugins/datatables-rowreorder/js/dataTables.rowReorder.min.js"></script>
         <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> --}}
 
-
-
+        <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
         {{-- Configured Scripts --}}
         @include('adminlte::plugins', ['type' => 'js'])
 
