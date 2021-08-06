@@ -263,6 +263,7 @@
         }
 
         function addFunction() {
+            $('#id').val('');
             $('#kode').val('');
             $('#nama').val('');
             $('#no_srt').val('');
