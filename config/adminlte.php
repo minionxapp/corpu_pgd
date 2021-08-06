@@ -252,6 +252,12 @@ return [
         ],
         ['header' => 'Menu'],
         [
+            'text' => 'Home',
+            'url'  => '/home',
+            'icon' => 'fas fa-fw fa-user',
+            
+        ],
+        [
             'text'    => 'ADMIN',
             'icon'    => 'fas fa-fw fa-share',
             'can'     => ['dev','admin'],
