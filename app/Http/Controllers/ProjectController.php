@@ -17,6 +17,33 @@ class ProjectController extends Controller
     {
         return view('project');
     }
+
+    public function projectByDivAndDept()
+    {
+        $user =  Auth::user();
+        if ($user->hasRole('admin') == true){
+            // dd('admin');
+            return $this->allProject();
+        }else{
+
+            return Datatables::of(Project::where('divisi','=',$user->divisi)
+            ->where('departement','=',$user->departemen)->get())
+            ->addColumn('action', function ($row) {
+                $btn = '<a href="#" onclick="viewFunction(\'' . $row->id . '\');" class="edit btn btn-info btn-sm">View</a> ';
+                $btn = $btn . ' <a href="#" onclick="editFunction(\'' . $row->id . '\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                $btn = $btn . ' <a href="/delProject/' . $row->id . '" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+                return $btn;
+            })
+            ->addColumn('task', function ($row) {
+                $task = '<a href="#" onclick="taskFunction(\'' . $row->id . '\');" class="edit btn btn-warning btn-sm">Task</a> ';
+                return $task;
+            })
+            ->rawColumns(['action', 'task'])
+            ->make(true);
+        }
+    }
+
+
     public function allProject()
     {
         return Datatables::of(Project::all())

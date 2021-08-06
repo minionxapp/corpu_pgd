@@ -72,7 +72,7 @@
         </div>
         <div class="col-12 col-sm-6 col-md-2">
             <div class="card">
-                <a href="https://sites.google.com/pegadaian.co.id/learningwallet" target="_blank">
+                <a href="https://learningwallet.pegadaian.co.id/" target="_blank">
                     <img src="/images/wallet2.jpg" class="card-img-top" alt="...">
                 </a>
                 <div class="card-body">
@@ -147,7 +147,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Larisa</h5>
                     <p class="card-text">.</p>
-                    <a href="https://newlarisa.pegadaian.co.id/login" class="btn btn-primary" target="_blank">Cuti</a>
+                    <a href="https://newlarisa.pegadaian.co.id/login" class="btn btn-primary" target="_blank">Larisa</a>
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
                 <div class="card-body">
                     <h5 class="card-title">SPPD</h5>
                     <p class="card-text">.</p>
-                    <a href="https://hc-trip.pegadaian.co.id/login" class="btn btn-primary" target="_blank">Cuti</a>
+                    <a href="https://hc-trip.pegadaian.co.id/login" class="btn btn-primary" target="_blank">SPPD</a>
                 </div>
             </div>
         </div>

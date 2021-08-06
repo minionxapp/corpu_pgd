@@ -63,10 +63,6 @@ class UserController extends Controller
          $modelUpdate->update($request->all());
          return redirect('/user')->with('sukses','Update Berhasil di Simpan');
      }
-
-
-
-
       return redirect('user')->with('sukses','Data Berhasil di Simpan');
    }
 

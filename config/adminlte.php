@@ -420,7 +420,7 @@ return [
                 [
                     'text' => 'Project',
                     'url'  => '/project',
-                    'can'     => ['dev','admin',],
+                    'can'     => ['dev','admin','user'],
                 ], 
                 [
                     'text' => 'Project Activity',

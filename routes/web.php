@@ -64,8 +64,7 @@ Route::group(['middleware' => ['permission:admin|dev']], function () {
     Route::get('/allUser', [App\Http\Controllers\UserController::class, 'allUser'])->name('allUser');
     Route::get('/divisi', [App\Http\Controllers\DivisiController::class, 'divisi'])->name('divisi');
     Route::get('/allDivisi', [App\Http\Controllers\DivisiController::class, 'allDivisi'])->name('allDivisi');
-    Route::get('/getAllDivisi', [App\Http\Controllers\DivisiController::class, 'getAllDivisi'])->name('getAllDivisi');
-    
+     
     Route::post('/addDivisi', [App\Http\Controllers\DivisiController::class, 'addDivisi'])->name('addDivisi');
     Route::get('/getDivisiById/{id}', [App\Http\Controllers\DivisiController::class, 'getDivisiById'])->name('getDivisiById');
     Route::get('/delDivisi/{id}', [App\Http\Controllers\DivisiController::class, 'delDivisi'])->name('delDivisi');
@@ -152,7 +151,9 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::post('/addProject', [App\Http\Controllers\ProjectController::class, 'addProject'])->name('addProject');
     Route::get('/getProjectById/{id}', [App\Http\Controllers\ProjectController::class, 'getProjectById'])->name('getProjectById');
     Route::get('/delProject/{id}', [App\Http\Controllers\ProjectController::class, 'delProject'])->name('delProject');
-            
+    Route::get('/projectByDivAndDept', [App\Http\Controllers\ProjectController::class, 'projectByDivAndDept'])->name('projectByDivAndDept');
+  
+    
     //TEST SCRIP GENERATOR
     Route::get('/projectactivity', [App\Http\Controllers\ProjectActivityController::class, 'ProjectActivity'])->name('projectactivity');
     Route::get('/allProjectActivity', [App\Http\Controllers\ProjectActivityController::class, 'allProjectActivity'])->name('allProjectActivity');
@@ -303,5 +304,8 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
         Route::get('/getTransGleadsSkillById/{id}', [App\Http\Controllers\TransGleadsSkillController::class, 'getTransGleadsSkillById'])->name('getTransGleadsSkillById');
         Route::get('/delTransGleadsSkill/{id}', [App\Http\Controllers\TransGleadsSkillController::class, 'delTransGleadsSkill'])->name('delTransGleadsSkill');
         
-
+        Route::get('/getAllDivisi', [App\Http\Controllers\DivisiController::class, 'getAllDivisi'])->name('getAllDivisi');
+        Route::get('/getDivisiByGroup', [App\Http\Controllers\DivisiController::class, 'getDivisiByGroup'])->name('getDivisiByGroup');
+      
+        
 });

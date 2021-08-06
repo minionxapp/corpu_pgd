@@ -23,8 +23,10 @@ class CreateProjectsTable extends Migration
             $table->string("jenis")->nullable();
             $table->string('nm_divisi')->nullable();
             $table->string('nm_departement')->nullable();
-            // $table->string()->nullable();
-            // $table->string()->nullable();
+            $table->string('pic')->nullable();
+            $table->date('mulai')->nullable();
+            $table->string('selesai')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();            
             $table->string('create_by')->nullable();
             $table->string('update_by')->nullable();

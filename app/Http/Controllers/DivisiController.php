@@ -68,5 +68,18 @@ class DivisiController extends Controller
 
     }
 
+    public function getDivisiByGroup(){
+        $user = Auth::user();
+        //  dd($user->divisi);
+        if ($user->hasRole('admin') == true){
+            $divisi = Divisi::all();
+
+        }else{
+            $divisi = Divisi::where('kode','=',$user->divisi)->get();
+        };
+        // dd(json_encode($divisi));
+        return json_encode($divisi);
+
+    }
 
 }

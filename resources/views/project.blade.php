@@ -216,13 +216,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- <form action="/addProjectActivity" method="POST">
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <label for="id">id</label>
-                            <input type="hidden" name="id" class="form-control" id="id">
-                        </div>
-                    </form> --}}
+                  
                     <div>
                         <table id="myActivity" class="display nowrap" style="width:100%">
                             <thead>
@@ -292,13 +286,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
     });  
 
 // ========================
-
-
-
-
-
-
-            createSelect('divisi', 'kode', 'nama', '/getAllDivisi');
+            createSelect('divisi', 'kode', 'nama', '/getDivisiByGroup');
             dropDown('divisi', 'departement', '/getDepartementByDivisi/', 'kode', 'nama');
             dropDown('departement', 'pic', '/getUserByDepartemen/', 'name', 'name');
 
@@ -360,16 +348,9 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: '/allProject',
+                ajax: '/projectByDivAndDept',
                 columns: [
-                    // {
-                    //     data: 'id',
-                    //     name: 'id'
-                    // },
-                    // {
-                    //     data: 'kd_project',
-                    //     name: 'kd_project'
-                    // },
+                   
                     {
                         data: 'nm_project',
                         name: 'nm_project'
