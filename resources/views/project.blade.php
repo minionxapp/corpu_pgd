@@ -160,11 +160,11 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="id">id</label>
-                            <input type="hidden" name="id" class="form-control" id="id">
+                            <input type="hidden" name="idTask" class="form-control" id="idTask">
                         </div>
                         <div class="form-group">
                             <label for="kd_project">kd_project</label>
-                            <input type="text" name="kd_project" class="form-control" id="kd_project_act">
+                            <input type="text" name="kd_project_act" class="form-control" id="kd_project_act">
                         </div>
                         <div class="form-group">
                             <label for="nm_project">Nama Project</label>
@@ -179,8 +179,8 @@
                             <input type="text" name="desc_activity" class="form-control" id="desc_activity">
                         </div>
                         <div class="form-group">
-                            <label for="status">Status</label>
-                            <input type="text" name="status" class="form-control" id="status">
+                            <label for="statusProject">Status</label>
+                            <input type="text" name="statusProject" class="form-control" id="statusProject">
                         </div>
                         <div class="form-group">
                             <label for="file1">file1</label>
@@ -192,7 +192,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnsubmit" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="btnsubmitAct" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -216,7 +216,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  
+                  <div>
+                    <label for="judulProject" id='judulProject'>Project Name</label>
+                    <input type="hidden" name="idProject" class="form-control" id="idProject">
+                   
+                  </div>
                     <div>
                         <table id="myActivity" class="display nowrap" style="width:100%">
                             <thead>
@@ -475,19 +479,47 @@ $('.modal').on('hidden.bs.modal', function(event) {
         }
 
        async function taskFunction($id) {
+            // if ( $.fn.dataTable.isDataTable( '#myActivity' ) ) {
+            //     table = $('#myActivity').DataTable();
+            // }
+            // else {
+            //     table = $('#myActivity').DataTable( {
+            //         paging: false
+            //     } );
+            // }
+
             $('#formTaskList').modal('show');
             // $('#myActivity').dataTable().fnClearTable();
+            $("#judulProject").empty();
+            $("#judulProject").append("Kode Peoject :"+$id);
+            $("#idProject").val($id);
             $('#myActivity').DataTable({
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
-                // paging: false,
-                // searching: false,
+                destroy: true,
                 responsive: true,
                 processing: true,
                 serverSide: true,
                 ajax: '#',
-                columns: [ ]
+                ajax: '/projectByDivAndDept',
+                columns: [
+                   
+                    {
+                        data: 'nm_project',
+                        name: 'nm_project'
+                    },
+                    {
+                        data: 'descripsi',
+                        name: 'descripsi'
+                    },
+                    
+                    {
+                        data: 'task',
+                        name: 'task',
+                        orderable: false,
+                        searchable: false
+                    }]
             });
             // alert("id "+$id);
              // myActivity
@@ -539,6 +571,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
         function addTaskFunction($id){
             // $('#formTaskList').modal('hide');
             $('#formTask').modal('show');
+            $('#kd_project_act').val($('#idProject').val());
             // taskListFunction(1);
         }
     </script>
