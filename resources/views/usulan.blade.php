@@ -91,11 +91,11 @@
 
                         <div class="form-group">
                             <label for="no_srt">No Surat/Pengajuan</label>
-                            <input type="text" name="no_srt" class="form-control" id="no_srt">
+                            <input type="text" name="no_srt" class="form-control" id="no_srt" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
-                            <input type="text" name="deskripsi" class="form-control" id="deskripsi">
+                            <input type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="unit_usul">Unit Kerja</label>
@@ -144,7 +144,7 @@
                         </div>
                         <div class="form-group">
                             <label for="comment">Catatan</label>
-                            <input type="text" name="comment" class="form-control" id="comment">
+                            <input type="text" name="comment" class="form-control" id="comment" autocomplete="off">
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
@@ -160,11 +160,11 @@
                         <div class="row">                            
                             <div class="form-group col-md-8">
                                 <label for="pic_usul">PIC Pengusul</label>
-                                <input type="text" name="pic_usul" class="form-control" id="pic_usul">
+                                <input type="text" name="pic_usul" class="form-control" id="pic_usul" autocomplete="off">
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="no_pic_usul">PIC Contact</label>
-                                <input type="text" name="no_pic_usul" class="form-control" id="no_pic_usul">
+                                <input type="text" name="no_pic_usul" class="form-control" id="no_pic_usul" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
