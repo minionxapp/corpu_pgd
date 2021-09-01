@@ -139,7 +139,8 @@
                         --}}
                         <div class="form-group">
                             <label for="file_usul_link" id='lbl_file_usul_link'>File Link</label>
-                            <input type="text" name="file_usul_link" class="form-control" id="file_usul_link">
+                            <input type="text" name="file_usul_link" class="form-control" 
+                                    id="file_usul_link"  autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="comment">Catatan</label>
