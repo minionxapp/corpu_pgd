@@ -130,11 +130,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="file_usul" id='lbl_file_usul'>File Usulan :</label>
-                            <input type="file" name="file_usul" class="form-control" id="file_usul">
-                        </div>
-
+                        {{-- 
+                            <div class="form-group">
+                                <label for="file_usul" id='lbl_file_usul'>File Usulan :</label>
+                                <input type="file" name="file_usul" class="form-control" id="file_usul">
+                            </div>
+                            
+                        --}}
                         <div class="form-group">
                             <label for="file_usul_link" id='lbl_file_usul_link'>File Link</label>
                             <input type="text" name="file_usul_link" class="form-control" id="file_usul_link">
