@@ -425,7 +425,7 @@ return [
                 [
                     'text' => 'Project Activity',
                     'url'  => '/projectactivity',
-                    'can'     => ['dev','admin',],
+                    'can'     => ['dev','admin','user'],
                 ],              
                 [
                     'text' => 'Dokumen Link',
