@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Judul</h1>
+                    <h1>Project</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -38,8 +38,6 @@
     <div>
         <table id="myTable" class="display nowrap" style="width:100%">
             <thead>
-                {{-- <th> id</th>
-                <th> kd_project</th> --}}
                 <th> Nama Project</th>
                 <th> Descripsi</th>
                 <th> Divisi</th>
@@ -65,13 +63,8 @@
                     <form action="/addProject" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            {{-- <label for="id">id</label> --}}
                             <input type="hidden" name="id" class="form-control" id="id">
                         </div>
-                        {{-- <div class="form-group">
-                            <label for="kd_project">kd_project</label>
-                            <input type="text" name="kd_project" class="form-control" id="kd_project">
-                        </div> --}}
                         <div class="form-group">
                             <label for="nm_project">Nama Project</label>
                             <input type="text" name="nm_project" class="form-control" id="nm_project">
@@ -160,35 +153,56 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label for="id">id</label>
-                            <input type="hidden" name="idTask" class="form-control" id="idTask">
+                            <input type="text" name="idTask" class="form-control" id="idTask" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kd_project">kd_project</label>
-                            <input type="text" name="kd_project_act" class="form-control" id="kd_project_act">
+                            <input type="text" name="kd_project_act" class="form-control" id="kd_project_act" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nm_project">Nama Project</label>
-                            <input type="text" name="nm_project" class="form-control" id="nm_project_act">
+                            <input type="text" name="nm_project" class="form-control" id="nm_project_act" readonly>
                         </div>
                         <div class="form-group">
                             <label for="nm_activity">Nama Activity</label>
-                            <input type="text" name="nm_activity" class="form-control" id="nm_activity">
+                            <input type="text" autocomplete="off" name="nm_activity" class="form-control" id="nm_activity">
                         </div>
                         <div class="form-group">
                             <label for="desc_activity">Deskripsi</label>
-                            <input type="text" name="desc_activity" class="form-control" id="desc_activity">
+                            <input type="text"autocomplete="off" name="desc_activity" class="form-control" id="desc_activity">
                         </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="mulai">Mulai Pelaksanaan</label>
+                                <input type="date" name="mulai" class="form-control" id="mulai">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="selesai">Selesai Pelaksanaan</label>
+                                <input type="date" name="selesai" class="form-control" id="selesai">
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
-                            <label for="statusProject">Status</label>
-                            <input type="text" name="statusProject" class="form-control" id="statusProject">
+                            {{-- <label for="statusProject">Status</label>
+                            <input type="text" name="statusProject" class="form-control" id="statusProject"> --}}
+                            <label for="statusProject">Task Status</label>
+                            <select name="statusProject" class="form-control" id="statusProject">
+                                <option value="Not Start">Not Start</option>
+                                <option value="On Progress">On Progress</option>
+                                <option value="Selesai">Selesai</option>
+                                <option value="Batal">Batal</option>
+                            </select>
+                        
+                        
                         </div>
                         <div class="form-group">
                             <label for="file1">file1</label>
-                            <input type="text" name="file1" class="form-control" id="file1">
+                            <input type="text" autocomplete="off" name="file1" class="form-control" id="file1">
                         </div>
                         <div class="form-group">
                             <label for="file1_desc">file1_desc</label>
-                            <input type="text" name="file1_desc" class="form-control" id="file1_desc">
+                            <input type="text" autocomplete="off" name="file1_desc" class="form-control" id="file1_desc">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -224,14 +238,8 @@
                     <div>
                         <table id="myActivity" class="display nowrap" style="width:100%">
                             <thead>
-                                {{-- <th> id</th>
-                                <th> kd_project</th> --}}
                                 <th> Nama Project</th>
                                 <th> Descripsi</th>
-                                {{-- <th> Divisi</th>
-                                <th> Departement</th>
-                                <th> Jenis</th>
-                                <th> Status</th> --}}
                                 <th>Task</th>
                                 <th>Action</th>
                         </table>
@@ -321,7 +329,8 @@ $('.modal').on('hidden.bs.modal', function(event) {
         //Divisi sebagai parent. departemen sebagai child 
         async function dropDown(parent, child, url, kode, nama) {
             $('select[name="' + parent + '"]').on('change', function() {
-                var filter = $(this).val();
+                var filter = $(this).val();//value yang diklik
+                // alert(filter);
                 if (filter) {
                     $('select[name="' + child + '"]').empty();
                     $.ajax({
@@ -331,6 +340,8 @@ $('.modal').on('hidden.bs.modal', function(event) {
                         dataType: "json",
                         success: function(data) {
                             $('select[name="' + child + '"]').empty();
+                            $('select[name="' + child + '"]').append('<option value="' +
+                                     '">' + '-Pilih-' + '</option>');
                             $.each(data, function(key, value) {
                                 $('select[name="' + child + '"]').append('<option value="' +
                                     value[kode] + '">' + value[nama] + '</option>');
@@ -338,7 +349,10 @@ $('.modal').on('hidden.bs.modal', function(event) {
                         }
                     });
                 } else {
-                    $('select[name="' + 'departemen' + '"]').empty();
+                    // $('select[name="' + 'departemen' + '"]').empty();
+                    $('select[name="' + child + '"]').empty();
+                    $('select[name="' + child + '"]').append('<option value="'+'">' + '-Pilih-' + '</option>');
+                    // alert('kosong');
                 }
             });
         }
@@ -462,6 +476,10 @@ $('.modal').on('hidden.bs.modal', function(event) {
             $('#id').attr('readonly', true);
             $('#btnsubmit').prop("disabled", false);
             readonly(false);
+            // await;
+            if ($('#status').val()=='Selesai') {
+                $('#btnsubmit').prop("disabled", true);
+            }
         }
 
         function readonly(params) {
@@ -479,19 +497,22 @@ $('.modal').on('hidden.bs.modal', function(event) {
         }
 
        async function taskFunction($id) {
-            // if ( $.fn.dataTable.isDataTable( '#myActivity' ) ) {
-            //     table = $('#myActivity').DataTable();
-            // }
-            // else {
-            //     table = $('#myActivity').DataTable( {
-            //         paging: false
-            //     } );
-            // }
-
+           
             $('#formTaskList').modal('show');
             // $('#myActivity').dataTable().fnClearTable();
             $("#judulProject").empty();
-            $("#judulProject").append("Kode Peoject :"+$id);
+            
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: '/getProjectById/' + $id,
+                success: function(data) {
+                    $('#nm_project_act').val(data.nm_project);
+                    $("#judulProject").append("Kode Peoject :"+$id+" "+$('#nm_project_act').val());
+                    }
+                });
+
+
             $("#idProject").val($id);
             $('#myActivity').DataTable({
                 rowReorder: {
@@ -502,7 +523,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 processing: true,
                 serverSide: true,
                 ajax: '#',
-                ajax: '/projectByDivAndDept',
+                ajax: '/#',
                 columns: [
                    
                     {

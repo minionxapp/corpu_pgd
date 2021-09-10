@@ -49,7 +49,8 @@ Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'calend
 Route::group(['middleware' => ['role:admin|user']], function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
     Route::get('/getDepartementByDivisi/{id}', [App\Http\Controllers\DepartementController::class, 'getDepartementByDivisi'])->name('getDepartementByDivisi');
-    
+    Route::get('/getUserByDepartemen/{departemen}', [App\Http\Controllers\UserController::class, 'getUserByDepartemen'])->name('getUserByDepartemen');
+
 });
 
 Route::group(['middleware' => ['permission:admin|dev']], function () {
@@ -57,8 +58,7 @@ Route::group(['middleware' => ['permission:admin|dev']], function () {
     Route::post('/addUser', [App\Http\Controllers\UserController::class, 'addUser'])->name('addUser');
     Route::get('/getUserById/{id}', [App\Http\Controllers\UserController::class, 'getUserById'])->name('getUserById');
     Route::get('/getUserByUserId/{id}', [App\Http\Controllers\UserController::class, 'getUserByUserId'])->name('getUserByUserId');
-    Route::get('/getUserByDepartemen/{departemen}', [App\Http\Controllers\UserController::class, 'getUserByDepartemen'])->name('getUserByDepartemen');
-
+   
     
 
     Route::get('/allUser', [App\Http\Controllers\UserController::class, 'allUser'])->name('allUser');

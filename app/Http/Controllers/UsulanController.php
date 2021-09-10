@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Departement;
 use Illuminate\Http\Request;
-
+// use App\Http\Controllers\ProjectController;
 
 use App\Models\Usulan;
 use App\Models\Divisi;
+use App\Models\Project;
 use DataTables;
 use Auth;
 use Carbon;
@@ -30,7 +31,8 @@ public function usulan()
 
 public function allUsulan()
     {        
-        return DataTables::of(Usulan::where('status','=','Usul')->get())
+        // return DataTables::of(Usulan::where('status','=','Usul')->get())
+        return DataTables::of(Usulan::all())
         ->addColumn('divisi', function($row){
             $divisi = Divisi::where('kode','=',$row->unit_usul)->first();
             return $divisi->nama;
@@ -55,12 +57,10 @@ public function addUsulan(Request $request)
             $usulan->no_srt = $request->no_srt;
             $usulan->deskripsi = $request->deskripsi;
             $usulan->unit_usul = $request->unit_usul;
-            //$request->status;
            
             $usulan->file_usul_link = $request->file_usul_link;
             $usulan->file_dispo_link = $request->file_dispo_link;
             $usulan->comment = $request->comment;
-            // $usulan->deadline = $request->deadline;
             $usulan->mulai = $request->mulai;
             $usulan->selesai = $request->selesai;
             
@@ -70,7 +70,28 @@ public function addUsulan(Request $request)
             $usulan->asign_to = $request->asign_to;
             $usulan->pic_asign_to = $request->pic_asign_to;
             $usulan->asign_desc = $request->asign_desc;
-            
+            $usulan->status ='Usul' ;
+            if($request->project_yn == "Y"){
+                $project = new Project();
+                $usulan->project_yn = $request->project_yn;
+                $usulan->project_id = Carbon\Carbon::now()->timestamp;
+                $usulan->status ="OnProgress";
+
+                // persiapan insert project ya 
+                $project->kd_project = Carbon\Carbon::now()->timestamp;
+                $project->nm_project = $usulan->deskripsi;
+                $project->descripsi = $usulan->deskripsi;
+                $project->divisi = '00001';
+                $project->departement = $usulan->asign_to;
+                $project->jenis = $usulan->jenis_usul;
+                //carinama departement dan nama divisi ya
+                $divisix = Divisi::where('kode', '=', $project->divisi)->get()->first();
+                $project->nm_divisi = $divisix->nama;
+                $project->nm_departement = (Departement::where('kode', '=', $project->departement)->get()->first())->nama;;
+                $project->status='Not Start';
+                $project->save();
+            }
+
             if($request->hasfile('file_usul')){
                 $request->file('file_usul')
                 ->move('images/usul/',Carbon\Carbon::now()->timestamp.'_'.($request->file('file_usul')->getClientOriginalName()));
@@ -83,16 +104,15 @@ public function addUsulan(Request $request)
                 $usulan->file_dispo =Carbon\Carbon::now()->timestamp.'_'.($request->file('file_dispo')->getClientOriginalName());//$request->file1;
             }
 
-            $usulan->status ='Usul' ;
-
             if($request->id == null ){    
                 $usulan->create_by = Auth::user()->user_id;
                 $usulan->save();
+                // $project->save();
                 return redirect('/usulan')->with('sukses','Data Berhasil di Simpan');
             }else{
                 $usulanUpdate = Usulan::find($request->id);
                 $usulanUpdate->update_by = Auth::user()->user_id;
-                $usulan->status =$request->status;
+                // $usulan->status =$request->status;
                 // dd($usulan->status); 
                 $usulanUpdate->update($usulan->toArray());
                 return redirect('/usulan')->with('sukses','Update Berhasil di Simpan');

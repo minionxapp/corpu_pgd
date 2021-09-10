@@ -30,6 +30,32 @@
         @endif
     </div>
 
+    {{-- <div class="row text-nowrap">
+        <div class="col-8" style="padding-top: 5px;">
+            <form action="/search" method="POST">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                                <select name="kriteria" class="form-control" id="kriteria"
+                                 readonly tabindex="-1">
+                                    <option value="">Status</option>
+                                    <option value='Usul'>Usulan</option>
+                                    <option value='OnProgress'>OnProgress</option>
+                                    <option value='Selesai'>Selesai</option>
+                                    <option value='Tolak'>Tolak</option>
+                                </select>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <button type="button" class="btn btn-primary btn-sm float-left"  
+                            data-toggle="modal" onclick="awal();" >Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> --}}
+
+
     <div class="row text-nowrap">
         <div class="col-12" style="padding-top: 5px;">
             <button type="button" class="btn btn-primary btn-sm float-left" data-toggle="modal" onclick="addFunction();">Add
@@ -48,21 +74,6 @@
                     <th>Mulai</th>
                     <th>Selesai</th>
                     <th>Status</th>
-                    {{-- <th>file_usul</th>
-                    <th>file_usul_link</th>
-                    <th>file_dispo</th>
-                    <th>file_dispo_link</th>
-                    <th>comment</th>
-                    <th>deadline</th>
-
-                    <th>jenis_usul</th>
-                    <th>pic_usul</th>
-                    <th>no_pic_usul</th>
-                    <th>asign_to</th>
-                    <th>pic_asign_to</th>
-                    <th>asign_desc</th>
-                    <th>create_by</th>
-                    <th>update_by</th> --}}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -177,11 +188,27 @@
                         </div>
 
 
-
+                        <div class="row">                            
+                            <div class="form-group col-md-4">
+                                <label for="Project_id">Create Project</label>
+                                {{-- <input type="text" name="project_id" class="form-control" id="project_id" autocomplete="off"> --}}
+                                <select name="project_yn" class="form-control" id="project_yn">
+                                    <option value="">-Project-</option>
+                                    <option value="Y">Yes</option>
+                                    <option value="N">No</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-8">
+                                 <label for="Project_id">Project Id</label>
+                                <input type="text" name="project_id" class="form-control" id="project_id" autocomplete="off" readonly>
+                            </div>
+                        </div>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" id="btnsubmit" class="btn btn-primary">Submit</button>
+                            {{-- <button type="button" id="btnproject" class="btn btn-primary"  onclick="createProject();">Creata Project</button> --}}
+                   
                         </div>
                     </form>
                 </div>
@@ -223,6 +250,7 @@
         });
 
         function awal() {
+            $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
                 rowReorder: {
                     selector: 'td:nth-child(2)'
@@ -289,6 +317,10 @@
             $('#update_by').val('');
             $('#mulai').val('');
             $('#selesai').val('');
+            $('#project_yn').val('');
+            $('#project_id').val('');
+            
+            
 
             readonly(false);
             $('#formData').modal('show');
@@ -299,6 +331,8 @@
             $('#btnsubmit').prop("disabled", false);
             $('#status').attr('readonly', true);
             $('#status').prop('disabled',true);
+            $('#btnproject').prop("disabled", true);
+            
         }
 
         async function viewFunction($id) {
@@ -309,6 +343,7 @@
                 url: '/getUsulanById/' +
                     $id, //    data:'_token = <?php echo csrf_token(); ?>',
                 success: function(data) {
+                    $('#btnproject').prop("disabled", true);
                     $("#id").val(data.id);
                     $('#no_srt').val(data.no_srt);
                     $('#deskripsi').val(data.deskripsi);
@@ -328,6 +363,10 @@
                     $('#update_by').val(data.update_by);
                     $('#mulai').val(data.mulai);
                     $('#selesai').val(data.selesai);
+
+                    $('#project_id').val(data.project_id);
+                    $('#project_yn').val(data.project_yn);
+                    
                     if (data.file_usul != null) {
                         $("#lbl_file_usul").empty();
                         $("#lbl_file_usul").append('  File Usulan :  <a href="{{ config('constant.imageShow') }}' +
@@ -341,11 +380,12 @@
                          data.file_dispo.substring(11) + '</a>');
                     }
 
-                    
-                    $("#lbl_file_usul_link").empty();
-                    $("#lbl_file_usul_link").append('  File Link :  <a href="' +
-                        data.file_usul_link + '" target=\"_blank\"">' + 
-                        'link'+ '</a>');
+                    if ( data.file_usul_link != null) {
+                        $("#lbl_file_usul_link").empty();
+                        $("#lbl_file_usul_link").append('  File Link :  <a href="' +
+                            data.file_usul_link + '" target=\"_blank\"">' + 
+                            'link'+ '</a>');
+                    }
                     $('#id').attr('readonly', true);
                     $('#btnsubmit').prop("disabled", true);
                     $('#btnsubmit').prop("disabled", true);
@@ -358,12 +398,13 @@
             await viewFunction($id);
             readonly(false);
             $('#btnsubmit').prop("disabled", false);
-            // $('#status').attr('readonly', true);
-            // $('status, select').readonly(true);
-            // $('#status').prop('tabindex', '-1');
-            // $('#status').prop('disabled',false);
-            // readonly tabindex="-1"
-            // attr('readonly', 'readonly')
+            $('#btnproject').prop("disabled", false);
+ 
+            if ($('#project_id').val() =="" || $('#project_id').val() === null) {
+                $('#project_yn').attr('readonly', false); 
+            }else{
+                $('#project_yn').attr('readonly', true);                
+            }
         }
 
         async function prosesFunction($id){
@@ -400,10 +441,14 @@
 
             $('#userid').attr('readonly', params);
             $('#name').attr('readonly', params);
+            $('#project_yn').attr('readonly', params);
 
             
 
         }
-
+        
+        // function createProject(){
+        //     alert("function");
+        // }
     </script>
 @stop
