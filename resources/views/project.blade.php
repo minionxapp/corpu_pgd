@@ -522,25 +522,30 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: '#',
-                ajax: '/#',
+                // ajax: '#',
+                ajax: '/allProjectActivity',
                 columns: [
-                   
                     {
                         data: 'nm_project',
                         name: 'nm_project'
                     },
                     {
-                        data: 'descripsi',
-                        name: 'descripsi'
+                        data: 'desc_activity',
+                        name: 'desc_activity'
                     },
-                    
                     {
-                        data: 'task',
-                        name: 'task',
+                        data: 'nm_activity',
+                        name: 'nm_activity'
+                    },
+
+                   
+                    {
+                        data: 'action',
+                        name: 'action',
                         orderable: false,
                         searchable: false
-                    }]
+                    }
+                    ]
             });
             // alert("id "+$id);
              // myActivity

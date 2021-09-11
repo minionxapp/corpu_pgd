@@ -78,7 +78,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Learning Wallet</h5>
                     <p class="card-text">.</p>
-                    <a href="https://sites.google.com/pegadaian.co.id/learningwallet" class="btn btn-primary">Learning
+                    <a href="https://learningwallet.pegadaian.co.id/" class="btn btn-primary">Learning
                         Wallet</a>
                 </div>
             </div>
