@@ -89,6 +89,8 @@ public function addUsulan(Request $request)
                 $project->nm_divisi = $divisix->nama;
                 $project->nm_departement = (Departement::where('kode', '=', $project->departement)->get()->first())->nama;;
                 $project->status='Not Start';
+                $project->mulai =$usulan->mulai;
+                $project->selesai=$usulan->selesai;
                 $project->save();
             }
 
