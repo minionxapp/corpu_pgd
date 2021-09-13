@@ -154,13 +154,16 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/projectByDivAndDept', [App\Http\Controllers\ProjectController::class, 'projectByDivAndDept'])->name('projectByDivAndDept');
   
     
-    //TEST SCRIP GENERATOR
+    //TEST SCRIP GENERATOR delProjectActivityAct
     Route::get('/projectactivity', [App\Http\Controllers\ProjectActivityController::class, 'ProjectActivity'])->name('projectactivity');
     Route::get('/allProjectActivity', [App\Http\Controllers\ProjectActivityController::class, 'allProjectActivity'])->name('allProjectActivity');
     Route::post('/addProjectActivity', [App\Http\Controllers\ProjectActivityController::class, 'addProjectActivity'])->name('addProjectActivity');
     Route::get('/getProjectActivityById/{id}', [App\Http\Controllers\ProjectActivityController::class, 'getProjectActivityById'])->name('getProjectActivityById');
     Route::get('/delProjectActivity/{id}', [App\Http\Controllers\ProjectActivityController::class, 'delProjectActivity'])->name('delProjectActivity');
-    
+    Route::get('/projectActivityByProject/{kd_project}', [App\Http\Controllers\ProjectActivityController::class, 'projectActivityByProject'])->name('projectActivityByProject');
+    Route::get('/delProjectActivityAct/{id}', [App\Http\Controllers\ProjectActivityController::class, 'delProjectActivityAct'])->name('delProjectActivityAct');
+  
+
     Route::get('/program', [App\Http\Controllers\Rep01Controller::class, 'getProgram'])->name('program');
     Route::get('/skill/{program}/{th}', [App\Http\Controllers\Rep01Controller::class, 'getSkillByProgram'])->name('skill');
     Route::get('/modul/{program}/{skill}', [App\Http\Controllers\Rep01Controller::class, 'getmodulBySkill'])->name('modul');

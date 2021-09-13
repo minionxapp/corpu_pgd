@@ -125,6 +125,7 @@
                                 <select name="jenis_usul" class="form-control" id="jenis_usul">
                                     <option value="">Jenis Usulan</option>
                                     <option value='Training'>Training</option>
+                                    <option value='E-Learning'>E-Learning</option>
                                     <option value='Data'>Data</option>
                                     <option value='Lain'>Lain-lain</option>
                                 </select>

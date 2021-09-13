@@ -143,7 +143,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Data Activity</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Input Activity</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -152,8 +152,7 @@
                     <form action="/addProjectActivity" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="id">id</label>
-                            <input type="text" name="idTask" class="form-control" id="idTask" readonly>
+                            <input type="text" name="id" class="form-control" id="idTask" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kd_project">kd_project</label>
@@ -175,26 +174,22 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="mulai">Mulai Pelaksanaan</label>
-                                <input type="date" name="mulai" class="form-control" id="mulai">
+                                <input type="date" name="mulai" class="form-control" id="mulaiAct">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="selesai">Selesai Pelaksanaan</label>
-                                <input type="date" name="selesai" class="form-control" id="selesai">
+                                <input type="date" name="selesai" class="form-control" id="selesaiAct">
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            {{-- <label for="statusProject">Status</label>
-                            <input type="text" name="statusProject" class="form-control" id="statusProject"> --}}
                             <label for="statusProject">Task Status</label>
-                            <select name="statusProject" class="form-control" id="statusProject">
+                            <select name="status" class="form-control" id="statusProject">
                                 <option value="Not Start">Not Start</option>
                                 <option value="On Progress">On Progress</option>
                                 <option value="Selesai">Selesai</option>
                                 <option value="Batal">Batal</option>
                             </select>
-                        
-                        
                         </div>
                         <div class="form-group">
                             <label for="file1">file1</label>
@@ -224,7 +219,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Data formTaskList</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">TaskList</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -238,9 +233,11 @@
                     <div>
                         <table id="myActivity" class="display nowrap" style="width:100%">
                             <thead>
-                                <th> Nama Project</th>
-                                <th> Descripsi</th>
-                                <th>Task</th>
+                                <th>Activity</th>
+                                <th>Descripsi</th>
+                                <th>Status</th>
+                                <th>Mulai</th>
+                                <th>Selesai</th>
                                 <th>Action</th>
                         </table>
                     </div>
@@ -495,13 +492,11 @@ $('.modal').on('hidden.bs.modal', function(event) {
             $('#selesai').attr('readonly', params);
             $('#status').attr('readonly', params);
         }
-
+// ACTIVITY--------------------------
        async function taskFunction($id) {
            
             $('#formTaskList').modal('show');
-            // $('#myActivity').dataTable().fnClearTable();
             $("#judulProject").empty();
-            
             $.ajax({
                 type: 'GET',
                 async: false,
@@ -521,24 +516,29 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 destroy: true,
                 responsive: true,
                 processing: true,
-                serverSide: true,
-                // ajax: '#',
-                ajax: '/allProjectActivity',
+                serverSide: true,               
+                ajax: '/projectActivityByProject/' +$id ,
                 columns: [
                     {
-                        data: 'nm_project',
-                        name: 'nm_project'
+                        data: 'nm_activity',
+                        name: 'nm_activity'
                     },
                     {
                         data: 'desc_activity',
                         name: 'desc_activity'
                     },
                     {
-                        data: 'nm_activity',
-                        name: 'nm_activity'
+                        data: 'status',
+                        name: 'status'
                     },
-
-                   
+                    {
+                        data: 'mulai',
+                        name: 'mulai'
+                    },
+                    {
+                        data: 'selesai',
+                        name: 'selesai'
+                    },
                     {
                         data: 'action',
                         name: 'action',
@@ -547,59 +547,60 @@ $('.modal').on('hidden.bs.modal', function(event) {
                     }
                     ]
             });
-            // alert("id "+$id);
-             // myActivity
-            //  $('#myActivity').DataTable({
-            //     rowReorder: {
-            //         selector: 'td:nth-child(2)'
-            //     },
-            //     responsive: true,
-            //     processing: true,
-            //     serverSide: true,
-            //     ajax: '#',
-            //     columns: [                    
-            //         // {
-            //             // data: 'action',
-            //             // name: 'action',
-            //             // orderable: false,
-            //             // searchable: false
-            //         // }
-            //     ]
-            // });
-
-
-
-
-            // $('#kd_project_act').val($id);
-            // $.ajax({
-            //     type: 'GET',
-            //     async: false,
-            //     url: '/getProjectById/' + $id,
-            //     success: function(data) {
-            //         $('#nm_project_act').val(data.nm_project);
-            //     }
-            // });
         }
 
-        // function taskListFunction($id) {
-        //     $('#formList').modal('show');
-            // $('#kd_project_act').val($id);
-            // $.ajax({
-            //     type: 'GET',
-            //     async: false,
-            //     url: '/getProjectById/' + $id,
-            //     success: function(data) {
-            //         $('#nm_project_act').val(data.nm_project);
-            //     }
-            // });
-        // }
 
         function addTaskFunction($id){
-            // $('#formTaskList').modal('hide');
             $('#formTask').modal('show');
             $('#kd_project_act').val($('#idProject').val());
-            // taskListFunction(1);
         }
+
+
+        function viewFunctionAct($id) {
+            $('#formTask').modal('show');
+            $('#kd_project_act').val($('#idProject').val());
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: '/getProjectActivityById/' + $id,
+                success: function(data) {
+                    $('#idTask').val(data.id);
+                    $('#kd_activity').val(data.kd_activity);
+                    $('#nm_activity').val(data.nm_activity);
+                    $('#desc_activity').val(data.desc_activity);
+                    $('#status').val(data.status);
+                    $('#kd_project').val(data.kd_project);
+                    $('#jenis').val(data.jenis);
+                    $('#nm_project').val(data.nm_project);
+                    $('#descripsi').val(data.descripsi);
+                    $('#divisi').val(data.divisi);
+                    $('#departement').val(data.departement);
+                    $('#file1').val(data.file1);
+                    $('#file1_desc').val(data.file1_desc);
+                    $('#file2').val(data.file2);
+                    $('#file2_desc').val(data.file2_desc);
+                    $('#file3').val(data.file3);
+                    $('#file3_desc').val(data.file3_desc);
+                    $('#btnsubmit').prop("disabled", true);
+
+                    $('#mulaiAct').val(data.mulai);
+                    $('#selesaiAct').val(data.selesai);
+
+                }
+
+            });
+
+            // $('#formData').modal('show');
+        }
+
+        function editFunctionAct($id) {
+            // alert("editFunctionAct "+$id);
+            viewFunctionAct($id);
+        }
+        // function deleteFunctionAct($id) {
+        //     alert("deleteFunctionAct");
+        // }
+
     </script>
 
 @stop

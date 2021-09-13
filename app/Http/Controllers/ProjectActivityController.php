@@ -24,9 +24,21 @@ namespace App\Http\Controllers;
                 ->rawColumns(['action'])
                 ->make(true);
             }
+            public function projectActivityByProject($project_Id)
+            {        
+                return Datatables::of(ProjectActivity::where('kd_project','=',$project_Id)->get())
+                ->addColumn('action', function($row){       
+                    $btn = '<a href="#" onclick="viewFunctionAct(\''.$row->id.'\');" class="edit btn btn-info btn-sm">View</a> ';
+                    $btn = $btn.' <a href="#" onclick="editFunctionAct(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                    $btn = $btn.' <a href="/delProjectActivityAct/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+                    return $btn;        })
+                ->rawColumns(['action'])
+                ->make(true);
+            }
 
             public function addProjectActivity(Request $request)
             {
+                // dd($request->id);
                 $model = new ProjectActivity;
                 if($request->id == null ){
                     // $model->id = $request->id;
@@ -34,7 +46,7 @@ namespace App\Http\Controllers;
                     $model->nm_activity = $request->nm_activity;
                     $model->desc_activity = $request->desc_activity;
                     $model->status = $request->status;
-                    $model->kd_project = $request->kd_project;
+                    $model->kd_project = $request->kd_project_act;
                     $model->jenis = $request->jenis;
                     $model->nm_project = $request->nm_project;
                     $model->descripsi = $request->descripsi;
@@ -50,12 +62,14 @@ namespace App\Http\Controllers;
                     $model->mulai = $request->mulai;
                     $model->selesai = $request->selesai;
                     $model->save();
-                    return redirect('/projectactivity')->with('sukses','Data Berhasil di Simpan');
+                    // addProjectActivity
+                    //return redirect('/projectactivity')->with('sukses','Data Berhasil di Simpan');
+                    return redirect('/project')->with('sukses','Data Activity Berhasil di Simpan');
                 }else{
                     $modelUpdate = ProjectActivity::find($request->id);
                     $modelUpdate->update_by = Auth::user()->user_id;
                     $modelUpdate->update($request->all());
-                    return redirect('/projectactivity')->with('sukses','Update Berhasil di Simpan');
+                    return redirect('/project')->with('sukses','Update Berhasil di Simpan');
                 }
             }
 
@@ -71,6 +85,15 @@ namespace App\Http\Controllers;
                 return redirect('/projectactivity')->with('sukses','Data Berhasil dihapus');
                 
             }
+            public function delProjectActivityAct($id)
+            {
+                $model = ProjectActivity::find($id);
+                $model->delete();
+                return redirect('/project')->with('sukses','Data Berhasil dihapus');
+                
+            }
+
+
         }
 
         

@@ -69,9 +69,7 @@ class ProjectController extends Controller
     {
         $model = new Project;
         if ($request->id == null) {
-            // $model->id = $request->id;
             $model->kd_project = Carbon\Carbon::now()->timestamp;
-            // $model->kd_project = $request->kd_project;
             $model->nm_project = $request->nm_project;
             $model->descripsi = $request->descripsi;
             $model->divisi = $request->divisi;
@@ -86,7 +84,6 @@ class ProjectController extends Controller
             $model->nm_departement = (Departement::where('kode', '=', $request->departement)->get()->first())->nama;;
 
             $model->create_by = Auth::user()->user_id;
-            // dd($model);
             $model->save();
             return redirect('/project')->with('sukses', 'Data Berhasil di Simpan');
         } else {
