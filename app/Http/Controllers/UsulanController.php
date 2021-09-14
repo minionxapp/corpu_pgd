@@ -40,10 +40,15 @@ public function allUsulan()
         
         ->addColumn('action', function($row){       
             $btn = '<a href="#" onclick="viewFunction(\''.$row->id.'\');" class="edit btn btn-info btn-sm">View</a> ';
-            if ($row->status == "Usul") {
+            if ($row->status == "Usul" ) {
                 $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
                 $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
             };
+            if ($row->status == "OnProgress" ) {
+                $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                // $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+            };
+            
             // $btn = $btn.' <a href="#" onclick="prosesFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Proses</a>';
             return $btn;        })
         ->rawColumns(['action','divisi'])
@@ -71,7 +76,8 @@ public function addUsulan(Request $request)
             $usulan->pic_asign_to = $request->pic_asign_to;
             $usulan->asign_desc = $request->asign_desc;
             $usulan->status ='Usul' ;
-            if($request->project_yn == "Y"){
+
+            if($request->project_yn == "Y" && $request->project_id ==""){
                 $project = new Project();
                 $usulan->project_yn = $request->project_yn;
                 $usulan->project_id = Carbon\Carbon::now()->timestamp;
@@ -109,13 +115,17 @@ public function addUsulan(Request $request)
             if($request->id == null ){    
                 $usulan->create_by = Auth::user()->user_id;
                 $usulan->save();
-                // $project->save();
+                // projectactivity
+                
                 return redirect('/usulan')->with('sukses','Data Berhasil di Simpan');
             }else{
                 $usulanUpdate = Usulan::find($request->id);
                 $usulanUpdate->update_by = Auth::user()->user_id;
-                // $usulan->status =$request->status;
-                // dd($usulan->status); 
+                // rubah --- biar didak tambah project untuk yg update
+
+
+
+                // 
                 $usulanUpdate->update($usulan->toArray());
                 return redirect('/usulan')->with('sukses','Update Berhasil di Simpan');
             }
