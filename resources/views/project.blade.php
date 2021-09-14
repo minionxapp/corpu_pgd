@@ -85,12 +85,12 @@
                             </select>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="mulai">Mulai Pelaksanaan</label>
+                            <div class="form-group col-md-6 col-xs-6">
+                                <label for="mulai">Mulai</label>
                                 <input type="date" name="mulai" class="form-control" id="mulai">
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="selesai">Selesai Pelaksanaan</label>
+                            <div class="form-group col-md-6 col-xs-6">
+                                <label for="selesai">Selesai</label>
                                 <input type="date" name="selesai" class="form-control" id="selesai">
                             </div>
                         </div>
@@ -173,11 +173,11 @@
 
                         <div class="row">
                             <div class="form-group col-md-6">
-                                <label for="mulai">Mulai Pelaksanaan</label>
+                                <label for="mulai">Mulai </label>
                                 <input type="date" name="mulai" class="form-control" id="mulaiAct">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="selesai">Selesai Pelaksanaan</label>
+                                <label for="selesai">Selesai</label>
                                 <input type="date" name="selesai" class="form-control" id="selesaiAct">
                             </div>
                         </div>
@@ -248,10 +248,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
 
     </div>
 
@@ -594,7 +590,6 @@ $('.modal').on('hidden.bs.modal', function(event) {
         }
 
         function editFunctionAct($id) {
-            // alert("editFunctionAct "+$id);
             viewFunctionAct($id);
         }
         // function deleteFunctionAct($id) {

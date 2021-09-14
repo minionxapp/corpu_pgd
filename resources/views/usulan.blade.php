@@ -68,12 +68,12 @@
         <table id="myTable" class="display nowrap" style="width:100%">
             <thead>
                 <tr>
-                    <th>No Surat</th>
                     <th>Deskripsi</th>
                     <th>Unit Kerja</th>
                     <th>Mulai</th>
                     <th>Selesai</th>
                     <th>Status</th>
+                    <th>No Surat</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -260,10 +260,8 @@
                 processing: true,
                 serverSide: true,
                 ajax: '/allUsulan',
-                columns: [{
-                        data: 'no_srt',
-                        name: 'no_srt'
-                    },
+                columns: [
+                    
                     {
                         data: 'deskripsi',
                         name: 'deskripsi'
@@ -283,6 +281,10 @@
                     {
                         data: 'status',
                         name: 'status'
+                    },
+                    {
+                        data: 'no_srt',
+                        name: 'no_srt'
                     },
                     {
                         data: 'action',
