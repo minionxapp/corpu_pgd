@@ -75,10 +75,12 @@ public function addUsulan(Request $request)
             $usulan->asign_to = $request->asign_to;
             $usulan->pic_asign_to = $request->pic_asign_to;
             $usulan->asign_desc = $request->asign_desc;
-            $usulan->status ='Usul' ;
+            // $usulan->status ='Usul' ;
+            $usulan->status = $request->status;
 
             if($request->project_yn == "Y" && $request->project_id ==""){
                 $project = new Project();
+                // $usulan->status = $request->status;
                 $usulan->project_yn = $request->project_yn;
                 $usulan->project_id = Carbon\Carbon::now()->timestamp;
                 $usulan->status ="OnProgress";
@@ -114,6 +116,7 @@ public function addUsulan(Request $request)
 
             if($request->id == null ){    
                 $usulan->create_by = Auth::user()->user_id;
+                $usulan->status ='Usul' ;
                 $usulan->save();
                 // projectactivity
                 
