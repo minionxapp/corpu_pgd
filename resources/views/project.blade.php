@@ -98,7 +98,7 @@
 
 
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-4">
                                 <label for="jenis">Jenis</label>
                                 <select name="jenis" class="form-control" id="jenis">
                                     <option value="">Jenis Project</option>
@@ -172,11 +172,11 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-6">
                                 <label for="mulai">Mulai </label>
                                 <input type="date" name="mulai" class="form-control" id="mulaiAct">
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-6">
                                 <label for="selesai">Selesai</label>
                                 <input type="date" name="selesai" class="form-control" id="selesaiAct">
                             </div>
