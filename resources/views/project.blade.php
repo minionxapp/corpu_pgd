@@ -85,11 +85,11 @@
                             </select>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-6 col-xs-6">
+                            <div class="form-group col-6">
                                 <label for="mulai">Mulai</label>
                                 <input type="date" name="mulai" class="form-control" id="mulai">
                             </div>
-                            <div class="form-group col-md-6 col-xs-6">
+                            <div class="form-group col-6">
                                 <label for="selesai">Selesai</label>
                                 <input type="date" name="selesai" class="form-control" id="selesai">
                             </div>
@@ -109,14 +109,14 @@
                                     <option value='Lain'>Lain-lain</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-4">
                                 <label for="pic">PIC</label>
                                 <select name="pic" class="form-control" id="pic">
                                     <option value="pic">PIC</option>
                                 </select>
                                 {{-- <input type="text" name="pic" class="form-control" id="pic"> --}}
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-4">
                                 <label for="status">Status</label>
                                 <select name="status" class="form-control" id="status">
                                     <option value="Not Start">Not Start</option>
