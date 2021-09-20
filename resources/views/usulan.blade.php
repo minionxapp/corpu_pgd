@@ -30,7 +30,7 @@
         @endif
     </div>
 
-    {{-- <div class="row text-nowrap">
+    <div class="row text-nowrap">
         <div class="col-8" style="padding-top: 5px;">
             <form action="/search" method="POST">
                 {{ csrf_field() }}
@@ -53,7 +53,7 @@
                 </div>
             </form>
         </div>
-    </div> --}}
+    </div>
 
 
     <div class="row text-nowrap">
@@ -119,9 +119,7 @@
                                 @foreach ($divisi as $item)
                                 <option value="{{$item->kode}}">{{$item->nama}}</option>
                                 @endforeach
-                            </select>
-                            
-
+                            </select>                          
                         </div>
                         <div class="row">
                             <div class="form-group col-6">
@@ -254,7 +252,17 @@
 
         });
 
-        function awal() {
+       async function awal() {
+            // alert("ususlan "+$('#kriteria').val());
+            $status = $('#kriteria').val();
+            $url ="";
+            if($status == null ||$status == ""||$status == ''){
+                $status ='Usul';
+                $url = '/allUsulan';
+                // allUsulan
+            }else{
+                $url = '/usulanByStatus/'+$status;
+            }
             $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
                 rowReorder: {
@@ -263,7 +271,9 @@
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: '/allUsulan',
+                // ajax: '/allUsulan',
+                ajax: $url,
+                
                 columns: [
                     
                     {

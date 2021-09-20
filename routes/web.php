@@ -152,7 +152,9 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/getProjectById/{id}', [App\Http\Controllers\ProjectController::class, 'getProjectById'])->name('getProjectById');
     Route::get('/delProject/{id}', [App\Http\Controllers\ProjectController::class, 'delProject'])->name('delProject');
     Route::get('/projectByDivAndDept', [App\Http\Controllers\ProjectController::class, 'projectByDivAndDept'])->name('projectByDivAndDept');
-  
+    Route::get('/projectByDivAndDeptAndStatus/{id}', [App\Http\Controllers\ProjectController::class, 'projectByDivAndDeptAndStatus'])->name('projectByDivAndDeptAndStatus');
+   
+    
     
     //TEST SCRIP GENERATOR delProjectActivityAct
     Route::get('/projectactivity', [App\Http\Controllers\ProjectActivityController::class, 'ProjectActivity'])->name('projectactivity');
@@ -199,7 +201,11 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/getUsulanById/{id}', [App\Http\Controllers\UsulanController::class, 'getUsulanById'])->name('getUsulanById');
     Route::post('/addUsulan', [App\Http\Controllers\UsulanController::class, 'addUsulan'])->name('addUsulan');
     Route::get('/delUsulan/{id}', [App\Http\Controllers\UsulanController::class, 'delUsulan'])->name('delUsulan');
+    Route::get('/usulanByStatus/{status}', [App\Http\Controllers\UsulanController::class, 'usulanByStatus'])->name('usulanByStatus');
+   
+
     
+
     Route::get('/rep01', [App\Http\Controllers\Rep01Controller::class, 'rep01'])->name('rep01');
     
     Route::get('/repUserTraining', [App\Http\Controllers\RepUserTrainingController::class, 'repUserTraining'])->name('repUserTraining');

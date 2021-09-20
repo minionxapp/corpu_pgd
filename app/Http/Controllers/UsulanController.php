@@ -114,14 +114,13 @@ public function addUsulan(Request $request)
                 $usulan->file_dispo =Carbon\Carbon::now()->timestamp.'_'.($request->file('file_dispo')->getClientOriginalName());//$request->file1;
             }
 
-            if($request->id == null ){    
+            if($request->id == null ){   //baru 
                 $usulan->create_by = Auth::user()->user_id;
                 $usulan->status ='Usul' ;
                 $usulan->save();
-                // projectactivity
-                
+                // projectactivity                
                 return redirect('/usulan')->with('sukses','Data Berhasil di Simpan');
-            }else{
+            }else{//update
                 $usulanUpdate = Usulan::find($request->id);
                 $usulanUpdate->update_by = Auth::user()->user_id;
                 // rubah --- biar didak tambah project untuk yg update
@@ -148,5 +147,33 @@ public function addUsulan(Request $request)
         
     }
     
+
+    public function usulanByStatus($status)
+    {        
+        
+        return DataTables::of(Usulan::where('status','=',$status)->get())
+        // return DataTables::of(Usulan::all())
+        ->addColumn('divisi', function($row){
+            $divisi = Divisi::where('kode','=',$row->unit_usul)->first();
+            return $divisi->nama;
+        })
+        
+        ->addColumn('action', function($row){       
+            $btn = '<a href="#" onclick="viewFunction(\''.$row->id.'\');" class="edit btn btn-info btn-sm">View</a> ';
+            if ($row->status == "Usul" ) {
+                $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+            };
+            if ($row->status == "OnProgress" ) {
+                $btn = $btn.' <a href="#" onclick="editFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                // $btn = $btn.' <a href="/delUsulan/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+            };
+            
+            // $btn = $btn.' <a href="#" onclick="prosesFunction(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Proses</a>';
+            return $btn;        })
+        ->rawColumns(['action','divisi'])
+        ->make(true);
+    }
+
 
 }

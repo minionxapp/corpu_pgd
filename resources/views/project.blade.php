@@ -29,6 +29,36 @@
     </div>
 
     <div class="row text-nowrap">
+        <div class="col-8" style="padding-top: 5px;">
+            <form action="/search" method="POST">
+                {{ csrf_field() }}
+                <div class="row">
+                    <div class="form-group col-lg-6">
+                                <select name="kriteria" class="form-control" id="kriteria"
+                                 readonly tabindex="-1">
+                                    <option value="">Status</option>
+                                    <option value="Not Start">Not Start</option>
+                                    <option value="On Progress">On Progress</option>
+                                    <option value="Selesai">Selesai</option>
+                                    <option value="Batal">Batal</option>
+                                </select>
+                    </div>
+                    <div class="form-group col-lg-6">
+                        <button type="button" class="btn btn-primary btn-sm float-left"  
+                            data-toggle="modal" onclick="awal();" >Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="row text-nowrap">
         <div class="col-12" style="padding-top: 5px;">
             <button type="button" class="btn btn-primary btn-sm float-left" data-toggle="modal" onclick="addFunction();">Add
             </button>
@@ -350,8 +380,16 @@ $('.modal').on('hidden.bs.modal', function(event) {
             });
         }
 
-        function awal() {
-            // myActivity
+       async function awal() {
+            $status = $('#kriteria').val();
+            $url ="";
+            if($status == null ||$status == ""||$status == ''){
+                $url = '/projectByDivAndDept/';
+            }else{
+                $url = '/projectByDivAndDeptAndStatus/'+$status;
+            }
+
+            $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
                 rowReorder: {
                     selector: 'td:nth-child(2)'
@@ -359,7 +397,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 responsive: true,
                 processing: true,
                 serverSide: true,
-                ajax: '/projectByDivAndDept',
+                ajax: $url,
                 columns: [
                    
                     {
