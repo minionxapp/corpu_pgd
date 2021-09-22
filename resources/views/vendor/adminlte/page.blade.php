@@ -12,7 +12,7 @@
     @stack('css')
     @yield('css')
 @stop
-
+@section('title', 'Corpu Digital v0.1')
 @section('classes_body', $layoutHelper->makeBodyClasses())
 
 @section('body_data', $layoutHelper->makeBodyData())

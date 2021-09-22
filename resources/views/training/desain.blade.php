@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard')
+{{-- @section('title', 'Dashboard') --}}
 
 @section('css_cus')
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>

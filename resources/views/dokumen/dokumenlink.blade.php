@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', config('adminlte.title'))
+{{-- @section('title', config('adminlte.title')) --}}
 
 @section('content_header')
 
@@ -28,7 +28,7 @@
         @endif
     </div>
     <div class="row text-nowrap">
-        <div class="col-12" style="padding-top: 5px;">
+        <div class="col-8" style="padding-top: 5px;">
             {{-- <button type="button" class="btn btn-primary btn-sm float-left"  
                 data-toggle="modal" onclick="addFunction();" >Add
             </button> --}}
@@ -36,19 +36,22 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-lg-6">
-                        <label for="program">Kriteria</label>
+                        {{-- <label for="program">Kriteria</label> --}}
                         <select name="kriteria" class="form-control" id="kriteria">
                             <option value={{$departemen_user->user_id}}>{{$departemen_user->name}}</option>
                             @foreach ($departemen as $item)
                             <option value={{$item->kode}}>{{$item->nama}}</option>
                             @endforeach
                             <option value="All">All</option>
-                        </select></div>
+                        </select>
+                    </div>
+                    <div class="form-group col-lg-6">
+                    <button type="button" class="btn btn-primary btn-sm float-left"  
+                        data-toggle="modal" onclick="awal();" >Search
+                    </button>
+                    </div>
                 </div>
             </form>
-            <button type="button" class="btn btn-primary btn-sm float-left"  
-                data-toggle="modal" onclick="awal();" >Search
-            </button>
         </div>
     </div>
 

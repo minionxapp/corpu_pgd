@@ -1,8 +1,7 @@
 @extends('adminlte::page')
-@section('title', 'Dashboard')
+{{-- @section('title', 'Project') --}}
 
 @section('content_header')
-
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
@@ -18,7 +17,7 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-
+@stop
 @section('content')
     <div>
         @if (session('sukses'))
@@ -34,18 +33,17 @@
                 {{ csrf_field() }}
                 <div class="row">
                     <div class="form-group col-lg-6">
-                                <select name="kriteria" class="form-control" id="kriteria"
-                                 readonly tabindex="-1">
-                                    <option value="">Status</option>
-                                    <option value="Not Start">Not Start</option>
-                                    <option value="On Progress">On Progress</option>
-                                    <option value="Selesai">Selesai</option>
-                                    <option value="Batal">Batal</option>
-                                </select>
+                        <select name="kriteria" class="form-control" id="kriteria" readonly tabindex="-1">
+                            <option value="">Status</option>
+                            <option value="Not Start">Not Start</option>
+                            <option value="On Progress">On Progress</option>
+                            <option value="Selesai">Selesai</option>
+                            <option value="Batal">Batal</option>
+                        </select>
                     </div>
                     <div class="form-group col-lg-6">
-                        <button type="button" class="btn btn-primary btn-sm float-left"  
-                            data-toggle="modal" onclick="awal();" >Search
+                        <button type="button" class="btn btn-primary btn-sm float-left" data-toggle="modal"
+                            onclick="awal();">Search
                         </button>
                     </div>
                 </div>
@@ -79,8 +77,8 @@
         </table>
     </div>
 
-    <div class="modal fade" id="formData" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="addDataLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="formData" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="addDataLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -168,8 +166,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="formTask" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="addDataLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="formTask" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="addDataLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -194,11 +192,13 @@
                         </div>
                         <div class="form-group">
                             <label for="nm_activity">Nama Activity</label>
-                            <input type="text" autocomplete="off" name="nm_activity" class="form-control" id="nm_activity">
+                            <input type="text" autocomplete="off" name="nm_activity" class="form-control"
+                                id="nm_activity">
                         </div>
                         <div class="form-group">
                             <label for="desc_activity">Deskripsi</label>
-                            <input type="text"autocomplete="off" name="desc_activity" class="form-control" id="desc_activity">
+                            <input type="text" autocomplete="off" name="desc_activity" class="form-control"
+                                id="desc_activity">
                         </div>
 
                         <div class="row">
@@ -211,7 +211,7 @@
                                 <input type="date" name="selesai" class="form-control" id="selesaiAct">
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="statusProject">Task Status</label>
                             <select name="status" class="form-control" id="statusProject">
@@ -244,8 +244,8 @@
 
     </div>
     {{-- </div> --}}
-    <div class="modal fade" id="formTaskList" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="addDataLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="formTaskList" data-backdrop="static" tabindex="-1" role="dialog"
+        aria-labelledby="addDataLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -255,11 +255,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                  <div>
-                    <label for="judulProject" id='judulProject'>Project Name</label>
-                    <input type="hidden" name="idProject" class="form-control" id="idProject">
-                   
-                  </div>
+                    <div>
+                        <label for="judulProject" id='judulProject'>Project Name</label>
+                        <input type="hidden" name="idProject" class="form-control" id="idProject">
+
+                    </div>
                     <div>
                         <table id="myActivity" class="display nowrap" style="width:100%">
                             <thead>
@@ -271,21 +271,16 @@
                                 <th>Action</th>
                         </table>
                     </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" id="btnaddtask" class="btn btn-primary" onclick="addTaskFunction();">Add Task</button>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="btnaddtask" class="btn btn-primary" onclick="addTaskFunction();">Add
+                            Task</button>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-
-
-
-
-
-
 @stop
 
 @section('css')
@@ -295,32 +290,33 @@
     <script>
         $(document).ready(function() {
 
-// ========================= untuk multi windows Modal
-$('.modal').on('hidden.bs.modal', function(event) {
-        $(this).removeClass( 'fv-modal-stack' );
-        $('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) - 1 );
-    });
+            // ========================= untuk multi windows Modal
+            $('.modal').on('hidden.bs.modal', function(event) {
+                $(this).removeClass('fv-modal-stack');
+                $('body').data('fv_open_modals', $('body').data('fv_open_modals') - 1);
+            });
 
-    $('.modal').on('shown.bs.modal', function (event) {
-        // keep track of the number of open modals
-        if ( typeof( $('body').data( 'fv_open_modals' ) ) == 'undefined' ) {
-            $('body').data( 'fv_open_modals', 0 );
-        }
+            $('.modal').on('shown.bs.modal', function(event) {
+                // keep track of the number of open modals
+                if (typeof($('body').data('fv_open_modals')) == 'undefined') {
+                    $('body').data('fv_open_modals', 0);
+                }
 
-        // if the z-index of this modal has been set, ignore.
-        if ($(this).hasClass('fv-modal-stack')) {
-            return;
-        }
+                // if the z-index of this modal has been set, ignore.
+                if ($(this).hasClass('fv-modal-stack')) {
+                    return;
+                }
 
-        $(this).addClass('fv-modal-stack');
-        $('body').data('fv_open_modals', $('body').data('fv_open_modals' ) + 1 );
-        $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals' )));
-        $('.modal-backdrop').not('.fv-modal-stack').css('z-index', 1039 + (10 * $('body').data('fv_open_modals')));
-        $('.modal-backdrop').not('fv-modal-stack').addClass('fv-modal-stack'); 
+                $(this).addClass('fv-modal-stack');
+                $('body').data('fv_open_modals', $('body').data('fv_open_modals') + 1);
+                $(this).css('z-index', 1040 + (10 * $('body').data('fv_open_modals')));
+                $('.modal-backdrop').not('.fv-modal-stack').css('z-index', 1039 + (10 * $('body').data(
+                    'fv_open_modals')));
+                $('.modal-backdrop').not('fv-modal-stack').addClass('fv-modal-stack');
 
-    });  
+            });
 
-// ========================
+            // ========================
             createSelect('divisi', 'kode', 'nama', '/getDivisiByGroup');
             dropDown('divisi', 'departement', '/getDepartementByDivisi/', 'kode', 'nama');
             dropDown('departement', 'pic', '/getUserByDepartemen/', 'name', 'name');
@@ -352,7 +348,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
         //Divisi sebagai parent. departemen sebagai child 
         async function dropDown(parent, child, url, kode, nama) {
             $('select[name="' + parent + '"]').on('change', function() {
-                var filter = $(this).val();//value yang diklik
+                var filter = $(this).val(); //value yang diklik
                 // alert(filter);
                 if (filter) {
                     $('select[name="' + child + '"]').empty();
@@ -364,7 +360,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
                         success: function(data) {
                             $('select[name="' + child + '"]').empty();
                             $('select[name="' + child + '"]').append('<option value="' +
-                                     '">' + '-Pilih-' + '</option>');
+                                '">' + '-Pilih-' + '</option>');
                             $.each(data, function(key, value) {
                                 $('select[name="' + child + '"]').append('<option value="' +
                                     value[kode] + '">' + value[nama] + '</option>');
@@ -374,19 +370,20 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 } else {
                     // $('select[name="' + 'departemen' + '"]').empty();
                     $('select[name="' + child + '"]').empty();
-                    $('select[name="' + child + '"]').append('<option value="'+'">' + '-Pilih-' + '</option>');
+                    $('select[name="' + child + '"]').append('<option value="' + '">' + '-Pilih-' +
+                        '</option>');
                     // alert('kosong');
                 }
             });
         }
 
-       async function awal() {
+        async function awal() {
             $status = $('#kriteria').val();
-            $url ="";
-            if($status == null ||$status == ""||$status == ''){
+            $url = "";
+            if ($status == null || $status == "" || $status == '') {
                 $url = '/projectByDivAndDept/';
-            }else{
-                $url = '/projectByDivAndDeptAndStatus/'+$status;
+            } else {
+                $url = '/projectByDivAndDeptAndStatus/' + $status;
             }
 
             $('#myTable').dataTable().fnDestroy();
@@ -399,7 +396,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 serverSide: true,
                 ajax: $url,
                 columns: [
-                   
+
                     {
                         data: 'nm_project',
                         name: 'nm_project'
@@ -508,7 +505,7 @@ $('.modal').on('hidden.bs.modal', function(event) {
             $('#btnsubmit').prop("disabled", false);
             readonly(false);
             // await;
-            if ($('#status').val()=='Selesai') {
+            if ($('#status').val() == 'Selesai') {
                 $('#btnsubmit').prop("disabled", true);
             }
         }
@@ -526,9 +523,9 @@ $('.modal').on('hidden.bs.modal', function(event) {
             $('#selesai').attr('readonly', params);
             $('#status').attr('readonly', params);
         }
-// ACTIVITY--------------------------
-       async function taskFunction($id) {
-           
+        // ACTIVITY--------------------------
+        async function taskFunction($id) {
+
             $('#formTaskList').modal('show');
             $("#judulProject").empty();
             $.ajax({
@@ -537,9 +534,9 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 url: '/getProjectById/' + $id,
                 success: function(data) {
                     $('#nm_project_act').val(data.nm_project);
-                    $("#judulProject").append("Kode Peoject :"+$id+" "+$('#nm_project_act').val());
-                    }
-                });
+                    $("#judulProject").append("Kode Peoject :" + $id + " " + $('#nm_project_act').val());
+                }
+            });
 
 
             $("#idProject").val($id);
@@ -550,10 +547,9 @@ $('.modal').on('hidden.bs.modal', function(event) {
                 destroy: true,
                 responsive: true,
                 processing: true,
-                serverSide: true,               
-                ajax: '/projectActivityByProject/' +$id ,
-                columns: [
-                    {
+                serverSide: true,
+                ajax: '/projectActivityByProject/' + $id,
+                columns: [{
                         data: 'nm_activity',
                         name: 'nm_activity'
                     },
@@ -579,12 +575,12 @@ $('.modal').on('hidden.bs.modal', function(event) {
                         orderable: false,
                         searchable: false
                     }
-                    ]
+                ]
             });
         }
 
 
-        function addTaskFunction($id){
+        function addTaskFunction($id) {
             $('#formTask').modal('show');
             $('#kd_project_act').val($('#idProject').val());
         }
@@ -630,10 +626,6 @@ $('.modal').on('hidden.bs.modal', function(event) {
         function editFunctionAct($id) {
             viewFunctionAct($id);
         }
-        // function deleteFunctionAct($id) {
-        //     alert("deleteFunctionAct");
-        // }
-
     </script>
 
 @stop

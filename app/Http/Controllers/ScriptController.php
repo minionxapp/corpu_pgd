@@ -17,7 +17,7 @@ class ScriptController extends Controller
         $table = $objParam->table;
         $script = "
         @extends('adminlte::page')
-        @section('title', 'Dashboard') 
+        {{-- @section('title', 'Dashboard') --}}
             
         @section('content_header')
         
