@@ -305,7 +305,16 @@ return [
             'icon'    => 'fas fa-fw fa-share',
             'can'     => ['dev','admin','user'],
             'submenu' => [
-                
+                [
+                    'text' => 'Kalendar',
+                    'url'  => '/calendar',
+                    'can'     => ['dev','admin','user'],
+                ],
+                [
+                    'text' => 'Event',
+                    'url'  => '/event',
+                    'can'     => ['dev','admin','user'],
+                ],
                 [
                     'text' => 'Jenis Training',
                     'url'  => '/jenistraining',
@@ -373,16 +382,8 @@ return [
                             'url'  => '/repUserTraining',
                             'can'     => ['dev','admin'],
                         ],              
-                        [
-                            'text' => 'Kalendar',
-                            'url'  => '/calendar',
-                            'can'     => ['dev','admin','user'],
-                        ],
-                        [
-                            'text' => 'Event',
-                            'url'  => '/event',
-                            'can'     => ['dev','admin','user'],
-                        ],
+                       
+                      
                         [
                             'text' => 'Usulan',
                             'url'  => '/usulan',

@@ -102,20 +102,20 @@
 
                         <div class="form-group">
                             <label for="no_srt">No Surat/Pengajuan</label>
-                            <input type="text" name="no_srt" class="form-control" id="no_srt" autocomplete="off">
+                            <input type="text" name="no_srt" class="form-control" id="no_srt" autocomplete="off" required>
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             {{-- <textarea type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off">
                             </textarea> --}}
-                            <input type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off">
+                            <input type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off" required>
                             
 
                         </div>
                         <div class="form-group">
                             <label for="unit_usul">Unit Kerja</label>
                             {{-- <input type="text" name="unit_usul" class="typeahead form-control" id="unit_usul"> --}}
-                            <select name="unit_usul" class="form-control" id="unit_usul">
+                            <select name="unit_usul" class="form-control" id="unit_usul" required>
                                 @foreach ($divisi as $item)
                                 <option value="{{$item->kode}}">{{$item->nama}}</option>
                                 @endforeach
@@ -124,7 +124,7 @@
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="jenis_usul">Jenis Usulan</label>
-                                <select name="jenis_usul" class="form-control" id="jenis_usul">
+                                <select name="jenis_usul" class="form-control" id="jenis_usul" required>
                                     <option value="">Jenis Usulan</option>
                                     <option value='Training'>Training</option>
                                     <option value='E-Learning'>E-Learning</option>
@@ -156,10 +156,7 @@
                             <input type="text" name="file_usul_link" class="form-control" 
                                     id="file_usul_link"  autocomplete="off">
                         </div>
-                        <div class="form-group">
-                            <label for="comment">Catatan</label>
-                            <input type="text" name="comment" class="form-control" id="comment" autocomplete="off">
-                        </div>
+                        
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="mulai">Mulai</label>
@@ -205,6 +202,14 @@
                                  <label for="Project_id">Project Id</label>
                                 <input type="text" name="project_id" class="form-control" id="project_id" autocomplete="off" readonly>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Catatan</label>
+                            <input type="text" rows="2" name="comment" class="form-control" id="comment" autocomplete="off">
+                        </div>
+                        <div class="form-group">                            
+                            <textarea type="text" rows="4" name="comment1" class="form-control" id="comment1" autocomplete="off" readonly>
+                            </textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -368,7 +373,8 @@
                     $('#status').val(data.status).change();
                     $('#file_usul_link').val(data.file_usul_link);
                     $('#file_dispo_link').val(data.file_dispo_link);
-                    $('#comment').val(data.comment);
+                    // $('#comment').val(data.comment);
+                    $('#comment1').val(data.comment);
                     $('#deadline').val(data.deadline);
                     $('#jenis_usul').val(data.jenis_usul);
                     $('#pic_usul').val(data.pic_usul);

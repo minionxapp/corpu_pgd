@@ -65,9 +65,12 @@ public function addUsulan(Request $request)
            
             $usulan->file_usul_link = $request->file_usul_link;
             $usulan->file_dispo_link = $request->file_dispo_link;
-            $usulan->comment = $request->comment;
-            $usulan->mulai = $request->mulai;
-            $usulan->selesai = $request->selesai;
+            if($request->comment != '' || $request->comment != null){
+                $usulan->comment = Carbon\Carbon::now().CHR(13).CHR(10).
+                $request->comment. CHR(13).CHR(10).' '. CHR(13).CHR(10).$request->comment1;
+            }
+                $usulan->mulai = $request->mulai;
+                $usulan->selesai = $request->selesai;
             
             $usulan->jenis_usul ="Training" ;//$request->jenis_usul;
             $usulan->pic_usul = $request->pic_usul;
