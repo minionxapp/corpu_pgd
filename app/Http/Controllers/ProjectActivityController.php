@@ -76,11 +76,16 @@ namespace App\Http\Controllers;
 
 
                     if($request->catatan != '' || $request->catatan != null){
-                        $modelUpdate->catatan = Carbon\Carbon::now().CHR(13).CHR(10).$request->catatan. CHR(13).CHR(10).' '. CHR(13).CHR(10).$request->catatan1;
+                        // $modelUpdate->catatan = Carbon\Carbon::now().CHR(13).CHR(10).
+                        //                         $request->catatan. CHR(13).CHR(10).' '. 
+                        //                         CHR(13).CHR(10).$request->catatan1;
+                        $catat_old = $request->catatan1;
+                        $catat_new = $request->catatan;
+                        $request->merge(['catatan' => Carbon\Carbon::now().CHR(13).CHR(10).
+                                                      $catat_new.CHR(13).CHR(10).$catat_old.CHR(13).CHR(10).' ']);
                     }
-                    $request->catatan =$modelUpdate->catatan;
-
-                    dd($modelUpdate->catatan);
+                    // $request->catatan =$modelUpdate->catatan;
+                    // dd($request->all());
                     $modelUpdate->update($request->all());
                     return redirect('/project')->with('sukses','Update Berhasil di Simpan');
                 }
