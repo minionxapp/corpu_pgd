@@ -229,6 +229,17 @@
                             <label for="file1_desc">file1_desc</label>
                             <input type="text" autocomplete="off" name="file1_desc" class="form-control" id="file1_desc">
                         </div>
+
+                        <div class="form-group">
+                            <label for="catatan">Catatan</label>
+                            <input type="text" rows="2" autocomplete="off" name="catatan" class="form-control"
+                                id="catatan_task" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <textarea type="text" autocomplete="off" name="catatan1" class="form-control"
+                                id="catatan_task1" readonly rows="4" autocomplete="off"></textarea>
+                        </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" id="btnsubmitAct" class="btn btn-primary">Submit</button>
@@ -615,6 +626,8 @@
 
                     $('#mulaiAct').val(data.mulai);
                     $('#selesaiAct').val(data.selesai);
+                    $('#catatan_task1').val(data.catatan);
+                    
 
                 }
 

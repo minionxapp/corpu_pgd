@@ -69,6 +69,7 @@ public function addUsulan(Request $request)
                 $usulan->comment = Carbon\Carbon::now().CHR(13).CHR(10).
                 $request->comment. CHR(13).CHR(10).' '. CHR(13).CHR(10).$request->comment1;
             }
+            // dd($usulan->comment);
                 $usulan->mulai = $request->mulai;
                 $usulan->selesai = $request->selesai;
             
