@@ -3,12 +3,13 @@ namespace App\Http\Controllers;
 
             use Illuminate\Http\Request;
             use App\Models\ProjectActivity;
+            use App\Models\Project;
             use DataTables;
             use Auth;
             use Carbon;
+            
             class ProjectActivityController extends Controller
             {
-
             public function ProjectActivity()
             {
                 return view('projectactivity');
@@ -24,13 +25,23 @@ namespace App\Http\Controllers;
                 ->rawColumns(['action'])
                 ->make(true);
             }
+            
             public function projectActivityByProject($project_Id)
             {        
+                $modelz = Project::find($project_Id);
+                // dd($model);
+                //||$model->status =='';
                 return Datatables::of(ProjectActivity::where('kd_project','=',$project_Id)->get())
-                ->addColumn('action', function($row){       
+                ->addColumn('action', function($row) use ($modelz){       
                     $btn = '<a href="#" onclick="viewFunctionAct(\''.$row->id.'\');" class="edit btn btn-info btn-sm">View</a> ';
-                    $btn = $btn.' <a href="#" onclick="editFunctionAct(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
-                    $btn = $btn.' <a href="/delProjectActivityAct/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+                    if($modelz->status !='Selesai'){                        
+                        if($row->status!='Selesai'){
+                            $btn = $btn.' <a href="#" onclick="editFunctionAct(\''.$row->id.'\');" class="edit btn btn-primary btn-sm">Edit</a>';
+                        }
+                        if($row->status=='Not Start'){
+                            $btn = $btn.' <a href="/delProjectActivityAct/'.$row->id.'" class="edit btn btn-danger btn-sm" onclick="return confirm(\'Yakin mau dihapus\');">Delete</a>';
+                        }
+                    }
                     return $btn;        })
                 ->rawColumns(['action'])
                 ->make(true);

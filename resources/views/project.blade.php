@@ -180,7 +180,7 @@
                     <form action="/addProjectActivity" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input type="text" name="id" class="form-control" id="idTask" readonly>
+                            <input type="hidden" name="id" class="form-control" id="idTask" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kd_project">kd_project</label>
@@ -242,7 +242,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnsubmitAct" class="btn btn-primary">Submit</button>
+                            <button type="submit" id="btnsubmitAct" class="btn btn-primary">Submit Task</button>
                         </div>
                     </form>
                 </div>
@@ -536,19 +536,28 @@
         }
         // ACTIVITY--------------------------
         async function taskFunction($id) {
-
+            
             $('#formTaskList').modal('show');
             $("#judulProject").empty();
+            var project_status;
             $.ajax({
                 type: 'GET',
                 async: false,
                 url: '/getProjectById/' + $id,
                 success: function(data) {
+                    project_status = data.status;
                     $('#nm_project_act').val(data.nm_project);
                     $("#judulProject").append("Kode Peoject :" + $id + " " + $('#nm_project_act').val());
                 }
             });
 
+            // alert('project Status  '+project_status);
+                // alert(project_status);
+            if (project_status == 'Selesai') {
+                $("#btnaddtask").prop("disabled", true);                    
+            }  else{
+                $("#btnaddtask").prop("disabled", false);  
+            }
 
             $("#idProject").val($id);
             $('#myActivity').DataTable({
@@ -594,12 +603,25 @@
         function addTaskFunction($id) {
             $('#formTask').modal('show');
             $('#kd_project_act').val($('#idProject').val());
+            // alert('addTaskFunction status');
+            if($('#status').val()== 'Selesai'){
+                // alert("llllllll  "+$('#status').val());
+                $('#btnsubmitAct').prop("disabled", true);  
+            }else{
+                $('#btnsubmitAct').prop("disabled", false); 
+            }
+
+
+            // 
         }
 
 
         function viewFunctionAct($id) {
             $('#formTask').modal('show');
             $('#kd_project_act').val($('#idProject').val());
+
+           
+
             $.ajax({
                 type: 'GET',
                 async: false,
@@ -630,10 +652,30 @@
                     
 
                 }
+                
 
             });
 
             // $('#formData').modal('show');
+            var project_status;
+            $.ajax({
+                type: 'GET',
+                async: false,
+                url: '/getProjectById/' + $('#idProject').val(),
+                success: function(data) {
+                    project_status = data.status;
+                    $('#nm_project_act').val(data.nm_project);
+                    $("#judulProject").append("Kode Peoject :" + $id + " " + $('#nm_project_act').val());
+                }
+            });
+            // alert('Project status kedua::: '+project_status);
+
+
+            if(project_status == 'Selesai'){
+                $('#btnsubmitAct').prop("disabled", true);  
+            }else{
+                $('#btnsubmitAct').prop("disabled", false); 
+            }
         }
 
         function editFunctionAct($id) {
