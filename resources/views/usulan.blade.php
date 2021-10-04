@@ -152,7 +152,7 @@
                             
                         --}}
                         <div class="form-group">
-                            <label for="file_usul_link" id='lbl_file_usul_link'>File Link</label>
+                            <label for="file_usul_link" id='lbl_file_usul_link'>Dokumen Link</label>
                             <input type="text" name="file_usul_link" class="form-control" 
                                     id="file_usul_link"  autocomplete="off">
                         </div>
@@ -407,7 +407,7 @@
                         $("#lbl_file_usul_link").empty();
                         $("#lbl_file_usul_link").append('  File Link :  <a href="' +
                             data.file_usul_link + '" target=\"_blank\"">' + 
-                            'link'+ '</a>');
+                            'dokumen'+ '</a>');
                     }
                     $('#id').attr('readonly', true);
                     $('#btnsubmit').prop("disabled", true);
