@@ -99,18 +99,25 @@
                         <div class="form-group">
                             <input type="hidden" name="id" class="form-control" id="id">
                         </div>
-
-                        <div class="form-group">
-                            <label for="no_srt">No Surat/Pengajuan</label>
-                            <input type="text" name="no_srt" class="form-control" id="no_srt" autocomplete="off" required>
+                        <div class="row">
+                            <div class="form-group col-7">
+                                <label for="no_srt">No Surat/Pengajuan</label>
+                                <input type="text" name="no_srt" class="form-control" id="no_srt" autocomplete="off" required>
+                            </div>
+                            
+                            <div class="form-group col-5">
+                                <label for="tgl_surat">Tgl Surat</label>
+                                <input type="date" name="tgl_surat" class="form-control" id="tgl_surat">
+                            </div>
                         </div>
+
+
+
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             {{-- <textarea type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off">
                             </textarea> --}}
                             <input type="text" name="deskripsi" class="form-control" id="deskripsi" autocomplete="off" required>
-                            
-
                         </div>
                         <div class="form-group">
                             <label for="unit_usul">Unit Kerja</label>
@@ -121,6 +128,8 @@
                                 @endforeach
                             </select>                          
                         </div>
+
+                       
                         <div class="row">
                             <div class="form-group col-6">
                                 <label for="jenis_usul">Jenis Usulan</label>
@@ -386,6 +395,8 @@
                     $('#update_by').val(data.update_by);
                     $('#mulai').val(data.mulai);
                     $('#selesai').val(data.selesai);
+                    $('#tgl_surat').val(data.tgl_surat);
+                    
 
                     $('#project_id').val(data.project_id);
                     $('#project_yn').val(data.project_yn);

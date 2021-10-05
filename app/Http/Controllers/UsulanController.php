@@ -64,6 +64,7 @@ public function addUsulan(Request $request)
             $usulan->unit_usul = $request->unit_usul;
            
             $usulan->file_usul_link = $request->file_usul_link;
+            $usulan->tgl_surat = $request->tgl_surat;
             $usulan->file_dispo_link = $request->file_dispo_link;
             if($request->comment != '' || $request->comment != null){
                 $usulan->comment = Carbon\Carbon::now().CHR(13).CHR(10).
