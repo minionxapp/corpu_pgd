@@ -180,7 +180,7 @@
                     <form action="/addProjectActivity" method="POST">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <input type="hidden" name="id" class="form-control" id="idTask" readonly>
+                            <input type="text" name="id" class="form-control" id="idTask" readonly>
                         </div>
                         <div class="form-group">
                             <label for="kd_project">kd_project</label>
@@ -603,10 +603,13 @@
         function addTaskFunction($id) {
             $('#formTask').modal('show');
             $('#kd_project_act').val($('#idProject').val());
-            // alert('addTaskFunction status');
+            $('#idTask ').val('');
+            $('#nm_activity ').val('');
+            $('#desc_activity ').val('');
+            
+            
             if($('#status').val()== 'Selesai'){
-                // alert("llllllll  "+$('#status').val());
-                $('#btnsubmitAct').prop("disabled", true);  
+                $('#btnsubmitAct').prop("disabled", true);                
             }else{
                 $('#btnsubmitAct').prop("disabled", false); 
             }
