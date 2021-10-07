@@ -606,6 +606,21 @@
             $('#idTask ').val('');
             $('#nm_activity ').val('');
             $('#desc_activity ').val('');
+
+            $('#mulaiAct').val('');
+            $('#selesaiAct').val('');
+            $('#statusProject').val('');
+            $('#file1').val('');
+            $('#file1_desc').val('');
+            $('#catatan_task').val('');
+            $('#catatan_task1').val('');
+
+             
+  
+ 
+   
+ 
+
             
             
             if($('#status').val()== 'Selesai'){
