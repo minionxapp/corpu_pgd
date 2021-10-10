@@ -1,6 +1,10 @@
 @extends('adminlte::page')
 {{-- @section('title', 'Project') --}}
-
+{{-- <style>
+    wrapok {
+    white-space: normal;
+}
+</style> --}}
 @section('content_header')
     <section class="content-header">
         <div class="container-fluid">
@@ -399,6 +403,7 @@
 
             $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
+                columnDefs:[{targets:[0], class:"wrapok"}],
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
@@ -410,7 +415,7 @@
 
                     {
                         data: 'nm_project',
-                        name: 'nm_project'
+                        name: 'nm_project',
                     },
                     {
                         data: 'descripsi',
