@@ -403,7 +403,7 @@
 
             $('#myTable').dataTable().fnDestroy();
             $('#myTable').DataTable({
-                columnDefs:[{targets:[0], class:"wrapok"}],
+                columnDefs:[{targets:[0], class:"wrapok"},{targets:[1], class:"wrapok"}],
                 rowReorder: {
                     selector: 'td:nth-child(2)'
                 },
