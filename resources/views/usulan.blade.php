@@ -45,9 +45,15 @@
                                     <option value='Tolak'>Tolak</option>
                                 </select>
                     </div>
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-3">
                         <button type="button" class="btn btn-primary btn-sm float-left"  
                             data-toggle="modal" onclick="awal();" >Search
+                        </button>
+                    </div>
+
+                    <div class="form-group col-lg-3">
+                        <button type="button" class="btn btn-primary btn-sm float-left"  
+                            data-toggle="modal" onclick="repusulan();" >Report
                         </button>
                     </div>
                 </div>
@@ -287,7 +293,7 @@
                 serverSide: true,
                 // ajax: '/allUsulan',
                 ajax: $url,
-                
+                columnDefs:[{targets:[0], class:"wrapok"},{targets:[1], class:"wrapok"}],
                 columns: [
                     
                     {
@@ -481,8 +487,10 @@
 
         }
         
-        // function createProject(){
-        //     alert("function");
-        // }
+        function repusulan(){
+            var strWindowFeatures = "location=no,scrollbars=yes,status=yes";
+            var URL = "/repUsulan";
+            var win = window.open(URL, "_blank", strWindowFeatures);
+        }
     </script>
 @stop

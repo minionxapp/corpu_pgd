@@ -481,8 +481,8 @@ return [
 
                 
                 [
-                    'text' => 'Detik.com',
-                    'url'  => 'detik.com',
+                    'text' => 'repUsulan',
+                    'url'  => '/repUsulan',
                     'can'     => ['dev','admin'],
                 ],
                 [

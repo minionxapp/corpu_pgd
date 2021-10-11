@@ -204,7 +204,7 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/usulanByStatus/{status}', [App\Http\Controllers\UsulanController::class, 'usulanByStatus'])->name('usulanByStatus');
    
 
-    
+    // Report
 
     Route::get('/rep01', [App\Http\Controllers\Rep01Controller::class, 'rep01'])->name('rep01');
     
@@ -212,7 +212,8 @@ Route::group(['middleware' => ['permission:admin|dev|group1|user']], function ()
     Route::get('/getTrainingByUser/{nik}', [App\Http\Controllers\RepUserTrainingController::class, 'getTrainingByUser'])->name('getTrainingByUser');
     Route::get('/cetakUserTraining/{nik}', [App\Http\Controllers\RepUserTrainingController::class, 'cetakUserTraining'])->name('cetakUserTraining');
   
-
+    Route::get('/repUsulan', [App\Http\Controllers\RepUsulanController::class, 'RepUsulan'])->name('RepUsulan');
+   
     
     
         //TEST SCRIP GENERATOR
