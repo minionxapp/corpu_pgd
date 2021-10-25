@@ -10,7 +10,7 @@ class Departement extends Model
 {
     use HasFactory;
     protected $fillable = [
-    'kode','nama','nik_kadept','nama_kadept','divisi_kode','create_by','update_by'];
+    'kode','nama','nik_kadept','nama_kadept','divisi_kode','create_by','update_by','folder'];
 
 
     public function divisi()

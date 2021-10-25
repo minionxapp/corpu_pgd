@@ -23,6 +23,7 @@ class CreateDepartementsTable extends Migration
             $table->timestamps();
             $table->string('create_by')->nullable();
             $table->string('update_by')->nullable();
+            $table->string('folder');
             
         });
     }

@@ -38,13 +38,16 @@ class DepartementController extends Controller
     public function addDepartement(Request $request)
     {
         $departement = new Departement;
+        // 'kode','nama','nik_kadept','nama_kadept','divisi_kode','create_by','update_by'];
+        $departement->kode = $request->kode;
+        $departement->nama = $request->nama;
+        $departement->nik_kadept = $request->nik_kadept;
+        $departement->nama_kadept = $request->nama_kadept;
+        $departement->divisi_kode = $request->divisi_kode;
+        $departement->folder = $request->folder;
+        
+        // dd($departement);
         if($request->id == null ){
-            // 'kode','nama','nik_kadept','nama_kadept','divisi_kode','create_by','update_by'];
-            $departement->kode = $request->kode;
-            $departement->nama = $request->nama;
-            $departement->nik_kadept = $request->nik_kadept;
-            $departement->nama_kadept = $request->nama_kadept;
-            $departement->divisi_kode = $request->divisi_kode;
             $departement->create_by = Auth::user()->user_id;
             $departement->save();
             return redirect('/departement')->with('sukses','Data Berhasil di Simpan');

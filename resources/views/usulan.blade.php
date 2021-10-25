@@ -166,10 +166,17 @@
                             </div>
                             
                         --}}
-                        <div class="form-group">
-                            <label for="file_usul_link" id='lbl_file_usul_link'>Dokumen Link</label>
-                            <input type="text" name="file_usul_link" class="form-control" 
-                                    id="file_usul_link"  autocomplete="off">
+                        <div class="row">
+                            <div class="form-group col-10">
+                                <label for="file_usul_link" id='lbl_file_usul_link'>Dokumen</label>
+                                
+                                <input type="text" name="file_usul_link" class="form-control" 
+                                id="file_usul_link"  autocomplete="off">
+                            </div>
+                            <div class="form-group col-2">
+                                <br>
+                                <a href="{{$userDept->folder}}" target=_blank id='folderlink' name='folderlink'>Folder</a>
+                            </div>
                         </div>
                         
                         <div class="row">
@@ -369,6 +376,7 @@
             $('#status').attr('readonly', true);
             $('#status').prop('disabled',true);
             $('#btnproject').prop("disabled", true);
+            $("#folderlink").show();
             
         }
 
@@ -422,16 +430,20 @@
 
                     if ( data.file_usul_link != null) {
                         $("#lbl_file_usul_link").empty();
-                        $("#lbl_file_usul_link").append('  File Link :  <a href="' +
+                        $("#lbl_file_usul_link").append('  Dokumen :  <a href="' +
                             data.file_usul_link + '" target=\"_blank\"">' + 
-                            'dokumen'+ '</a>');
+                            'File'+ '</a>');
                     }
                     $('#id').attr('readonly', true);
                     $('#btnsubmit').prop("disabled", true);
                     $('#btnsubmit').prop("disabled", true);
+
+                    $("#folderlink").hide();
+                     
                 }
             });
             $('#formData').modal('show');
+            // document.getElementById("folderlink").value="#";
         }
 
         async function editFunction($id) {
@@ -439,6 +451,7 @@
             readonly(false);
             $('#btnsubmit').prop("disabled", false);
             $('#btnproject').prop("disabled", false);
+            $("#folderlink").show();
  
             if ($('#project_id').val() =="" || $('#project_id').val() === null) {
                 $('#project_yn').attr('readonly', false); 

@@ -26,7 +26,10 @@ public function usulan()
         $divisi = Divisi::all();
         $user = Auth::user();
         $departemen = Departement::where('divisi_kode','=',$user->divisi)->get();
-        return view('usulan',['divisi'=>$divisi,'departemen'=>$departemen]);
+        
+        //  dd($user->departemen);
+        $userDept = Departement::where('kode','=',$user->departemen)->get()->first();
+        return view('usulan',['divisi'=>$divisi,'departemen'=>$departemen,'userDept'=>$userDept]);
     }
 
 public function allUsulan()

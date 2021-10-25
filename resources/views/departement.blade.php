@@ -103,6 +103,11 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="folder">Dept. Folder</label>
+                            <input type="text" name="folder" class="form-control" id="folder">
+                        </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button type="submit" id="btnsubmit" class="btn btn-primary">Submit</button>
